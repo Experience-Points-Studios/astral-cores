@@ -1,5 +1,6 @@
 package de.ep.astralcores;
 
+import de.ep.astralcores.manager.NetherTimeManager;
 import de.ep.astralcores.core.respawn.CoreRespawnManager;
 import de.ep.astralcores.manager.CoreCooldownManager;
 import de.ep.astralcores.manager.CoreTickManager;
@@ -34,6 +35,8 @@ public class MainLoop {
 
     // Loop that runs every servertick
     private static void oneTickLoop(MinecraftServer server) {
+
+        NetherTimeManager.tick(server);
 
         CoreRespawnManager.tick();
 

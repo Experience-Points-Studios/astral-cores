@@ -19,19 +19,26 @@ public class NetherTimeCriterion
 
     public void trigger(
             ServerPlayer player,
-            long elapsedTime
+            long elapsedTicks
     ) {
+        if (player.level().dimension() != Level.NETHER) {
+            return;
+        }
+
+        long finalElapsedTicks =
+                elapsedTicks;
+
         this.trigger(
                 player,
                 conditions ->
-                        player.level().dimension() == Level.NETHER
-                                && conditions.requirementsMet(elapsedTime)
+                        finalElapsedTicks >=
+                                conditions.requiredTicks()
         );
     }
 
     public record Conditions(
             Optional<ContextAwarePredicate> player,
-            long requiredTime
+            long requiredTicks
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
         public static final Codec<Conditions> CODEC =
@@ -39,27 +46,27 @@ public class NetherTimeCriterion
                         instance.group(
                                 ContextAwarePredicate.CODEC
                                         .optionalFieldOf("player")
-                                        .forGetter(Conditions::player),
+                                        .forGetter(
+                                                Conditions::player
+                                        ),
 
                                 Codec.LONG
-                                        .fieldOf("required_time")
-                                        .forGetter(Conditions::requiredTime)
-
-                        ).apply(instance, Conditions::new)
+                                        .fieldOf("required_ticks")
+                                        .forGetter(
+                                                Conditions::requiredTicks
+                                        )
+                        ).apply(
+                                instance,
+                                Conditions::new
+                        )
                 );
 
-        public boolean requirementsMet(
-                long elapsedTime
-        ) {
-            return elapsedTime >= requiredTime;
-        }
-
         public static Conditions create(
-                long milliseconds
+                long requiredTicks
         ) {
             return new Conditions(
                     Optional.empty(),
-                    milliseconds
+                    requiredTicks
             );
         }
     }

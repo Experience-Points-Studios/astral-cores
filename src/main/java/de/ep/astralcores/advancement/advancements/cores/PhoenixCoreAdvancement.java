@@ -1,8 +1,8 @@
 package de.ep.astralcores.advancement.advancements.cores;
 
-import de.ep.astralcores.util.AdvancementUtil;
 import de.ep.astralcores.advancement.criterion.CriterionRegistry;
 import de.ep.astralcores.advancement.criterion.criterions.NetherTimeCriterion;
+import de.ep.astralcores.util.AdvancementUtil;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
@@ -13,11 +13,16 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 
-
 import java.util.List;
 import java.util.function.Consumer;
 
 public class PhoenixCoreAdvancement {
+
+    private static final String TIMER_ID =
+            "phoenix_core";
+
+    private static final long REQUIRED_TICKS =
+            1L * 60L * 20L;
 
     private static final List<ResourceKey<Biome>> BIOMES = List.of(
             Biomes.NETHER_WASTES,
@@ -27,58 +32,66 @@ public class PhoenixCoreAdvancement {
             Biomes.BASALT_DELTAS
     );
 
-
     public static void generate(
-
             HolderLookup.Provider lookup,
             Consumer<AdvancementHolder> consumer
     ) {
-        warmLiving(lookup, consumer);
+        warmLiving(
+                lookup,
+                consumer
+        );
     }
 
     private static void warmLiving(
             HolderLookup.Provider lookup,
             Consumer<AdvancementHolder> consumer
     ) {
-        Advancement.Builder builder = Advancement.Builder.advancement()
-                .display(
-                        Items.BLAZE_POWDER,
-                        Component.literal("Hot Living"),
-                        Component.literal(
-                                "Be for 12 hours in the nether and visit every nether biome"
-                        ),
-                        null,
-                        AdvancementType.CHALLENGE,
-                        true,
-                        true,
-                        false
-                );
+        Advancement.Builder builder =
+                Advancement.Builder.advancement()
+                        .display(
+                                Items.BLAZE_POWDER,
+                                Component.literal(
+                                        "Hot Living"
+                                ),
+                                Component.literal(
+                                        "Be for 1 minute in the nether and visit every nether biome"
+                                ),
+                                null,
+                                AdvancementType.CHALLENGE,
+                                true,
+                                true,
+                                false
+                        );
 
         for (ResourceKey<Biome> biome : BIOMES) {
             builder.addCriterion(
                     biome.identifier().getPath(),
-                    AdvancementUtil.isInBiome(lookup, biome)
+                    AdvancementUtil.isInBiome(
+                            lookup,
+                            biome
+                    )
             );
         }
 
         builder
                 .addCriterion(
-                        "nether_12_hours",
+                        "nether_time",
                         CriterionRegistry.NETHER_TIME.createCriterion(
                                 NetherTimeCriterion.Conditions.create(
-                                        // 12h
-                                        12L * 60L * 60L * 1000L
+                                        REQUIRED_TICKS
                                 )
                         )
                 )
                 .rewards(
-                        AdvancementUtil.reward("phoenix_core")
+                        AdvancementUtil.reward(
+                                "phoenix_core"
+                        )
                 )
                 .save(
                         consumer,
-                        AdvancementUtil.advancementId("core/phoenix_core")
+                        AdvancementUtil.advancementId(
+                                "core/phoenix_core"
+                        )
                 );
-
-
     }
 }
