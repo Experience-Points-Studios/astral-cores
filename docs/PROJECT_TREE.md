@@ -4,6 +4,21 @@ src/main/java/de/ep/astralcores/
 ├── actionbar
 │   ├── ActionBarManager.java
 │   └── ActionBarMode.java
+├── advancement
+│   ├── advancements
+│   │   └── cores
+│   │       ├── AeroCoreAdvancement.java
+│   │       ├── ChronoCoreAdvancement.java
+│   │       ├── GaleCoreAdvancement.java
+│   │       ├── LeviathanCoreAdvancement.java
+│   │       ├── NatureCoreAdvancement.java
+│   │       ├── PhoenixCoreAdvancement.java
+│   │       └── ShadowCoreAdvancement.java
+│   └── criterion
+│       ├── criterions
+│       │   ├── NetherTimeCriterion.java
+│       │   └── VoidSurvivalCriterion.java
+│       └── CriterionRegistry.java
 ├── command
 │   ├── actionbar
 │   │   ├── ActionBarCommand.java
@@ -57,23 +72,35 @@ src/main/java/de/ep/astralcores/
 │   │   ├── NatureCore.java
 │   │   ├── PhoenixCore.java
 │   │   └── ShadowCore.java
+│   ├── data
+│   │   └── CoreActivationResult.java
+│   ├── respawn
+│   │   ├── data
+│   │   │   ├── AltarData.java
+│   │   │   └── CoreRespawnData.java
+│   │   ├── CoreRespawnDataManager.java
+│   │   └── CoreRespawnManager.java
 │   ├── Core.java
 │   ├── CoreFactory.java
 │   ├── CoreRegistry.java
-│   ├── CoreStackResult.java
 │   └── CoreType.java
+├── datagen
+│   ├── AstralCoresAdvancementProvider.java
+│   └── AstralCoresDataGenerator.java
 ├── event
 │   ├── logic
 │   │   ├── CoreDeathLogic.java
 │   │   └── CoreInteractLogic.java
-│   ├── PlayerEvents.java
+│   ├── PlayerEventsListener.java
 │   └── ServerLifecycleEventsListener.java
 ├── manager
-│   ├── CooldownManager.java
+│   ├── AltarManager.java
 │   ├── CoreActivateManager.java
-│   └── CoreTickManager.java
+│   ├── CoreCooldownManager.java
+│   ├── CoreTickManager.java
+│   ├── CriterionTickManager.java
+│   └── NetherTimeManager.java
 ├── mixin
-│   ├── AreaEffectCloudMixin.java
 │   ├── BundleItemMixin.java
 │   ├── ClientboundSetEquipmentPacketMixin.java
 │   ├── HopperBlockEntityMixin.java
@@ -83,27 +110,18 @@ src/main/java/de/ep/astralcores/
 │   ├── MobMixin.java
 │   ├── PlayerEntityMixin.java
 │   ├── ServerExplosionMixin.java
+│   ├── ServerGamePacketListenerImpMixin.java
 │   └── SlotAndShulkerBoxSlotMixin.java
 ├── playerdata
 │   ├── PlayerData.java
 │   └── PlayerDataManager.java
-├── structure
-│   ├── spawners
-│   │   └── MeteorSpawner.java
-│   ├── CoreToStructureLookup.java
-│   ├── StructureDataManager.java
-│   ├── StructureDefinition.java
-│   ├── StructureInstance.java
-│   ├── StructureManager.java
-│   ├── StructureRegistry.java
-│   ├── StructureSpawnResult.java
-│   ├── StructureSpawner.java
-│   └── StructureType.java
 ├── util
+│   ├── AdvancementUtil.java
 │   ├── BiomeUtils.java
 │   ├── CropUtils.java
 │   ├── Effects.java
 │   ├── FoodUtils.java
+│   ├── SaplingUtils.java
 │   └── TickTimer.java
 ├── AstralCores.java
 └── MainLoop.java
