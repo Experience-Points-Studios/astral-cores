@@ -22,7 +22,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.DeathProtection;
 
 import java.util.*;
@@ -151,13 +150,7 @@ public class ChronoCoreLogic {
             return true;
         }
 
-        Optional<Core> coreOptional = CoreRegistry.get(CoreType.CHRONO_CORE);
-
-        if (coreOptional.isEmpty()) {
-            return true;
-        }
-
-        Core core = coreOptional.get();
+        Core core = CoreRegistry.get(CoreType.CHRONO_CORE);
 
         CoreCooldownManager.startPassiveCooldown(data, CoreType.CHRONO_CORE, core.getPassiveCooldown());
 
@@ -194,10 +187,10 @@ public class ChronoCoreLogic {
             );
         }
 
-        // Fetches the core base item or defaults to a clock item if missing.
-        Item registeredItem = CoreRegistry.get(CoreType.CHRONO_CORE)
-                .map(Core::getBaseItem)
-                .orElse(Items.CLOCK);
+        // Fetches the core base item.
+        Item registeredItem = CoreRegistry
+                .get(CoreType.CHRONO_CORE)
+                .getBaseItem();
 
         // Builds a temporary item stack configured with death protection attributes.
         ItemStack fakeCoreItem = new ItemStack(registeredItem);

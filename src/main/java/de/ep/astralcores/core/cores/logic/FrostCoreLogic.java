@@ -1,7 +1,6 @@
 package de.ep.astralcores.core.cores.logic;
 
 import de.ep.astralcores.AstralCores;
-import de.ep.astralcores.core.Core;
 import de.ep.astralcores.core.CoreRegistry;
 import de.ep.astralcores.core.CoreType;
 import de.ep.astralcores.core.data.CoreActivationResult;
@@ -112,12 +111,10 @@ public class FrostCoreLogic {
             return;
         }
 
-        CoreRegistry.get(CoreType.FROST_CORE).ifPresent(core ->
-                CoreCooldownManager.startActiveCooldown(
-                        data,
-                        CoreType.FROST_CORE,
-                        core.getActiveCooldown()
-                )
+        CoreCooldownManager.startActiveCooldown(
+                data,
+                CoreType.FROST_CORE,
+                CoreRegistry.get(CoreType.FROST_CORE).getActiveCooldown()
         );
 
         attacker.sendSystemMessage(

@@ -43,10 +43,16 @@ public class CoreRegistry {
     }
 
     // Gets a core instance matching the specified core type enum
-    public static Optional<Core> get(CoreType type) {
-        return Optional.ofNullable(
-                BY_TYPE.get(type)
-        );
+    public static Core get(CoreType type) {
+        Core core = BY_TYPE.get(type);
+
+        if (core == null) {
+            throw new IllegalStateException(
+                    "No core registered for: " + type
+            );
+        }
+
+        return core;
     }
 
     // Gets a core instance matching the specified string core id

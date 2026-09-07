@@ -27,11 +27,7 @@ public class CoreActivateManager {
                     .withStyle(ChatFormatting.RED));
         }
 
-        Core core = CoreRegistry.get(targetedType).orElse(null);
-        if (core == null) {
-            return new ActivationResult(false, Component.literal("Your stored core type doesn't exist.")
-                    .withStyle(ChatFormatting.RED));
-        }
+        Core core = CoreRegistry.get(targetedType);
 
         // Rejects execution sequence if the specific core capacity is currently locked on cooldown
         if (!CoreCooldownManager.isActiveReady(data, targetedType)) {

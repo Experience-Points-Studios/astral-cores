@@ -1,10 +1,11 @@
 package de.ep.astralcores.event.logic;
 
 import de.ep.astralcores.AstralCores;
+import de.ep.astralcores.actionbar.ActionBarManager;
 import de.ep.astralcores.config.ConfigManager;
+import de.ep.astralcores.core.Core;
 import de.ep.astralcores.core.CoreRegistry;
 import de.ep.astralcores.core.CoreType;
-import de.ep.astralcores.actionbar.ActionBarManager;
 import de.ep.astralcores.playerdata.PlayerData;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -23,7 +24,8 @@ public class CoreDeathLogic {
         CoreType equipped = data.getEquippedCore();
         if (equipped != null) {
             // Runs cleanup actions for the equipped core before removal
-            CoreRegistry.get(equipped).ifPresent(core -> core.onRemoved(player));
+            Core core = CoreRegistry.get(equipped);
+            core.onRemoved(player);
 
             // Clears the core type from the player data slot
             data.setEquippedCore(null);

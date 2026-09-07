@@ -27,17 +27,8 @@ public class ActionBarManager {
         }
 
         CoreType equippedType = data.getEquippedCore();
-        Core core = CoreRegistry.get(equippedType).orElse(null);
 
-        // Shows empty slots if the core registry fails
-        if (core == null) {
-            switch (mode) {
-                case ICON -> sendPacket(player, Component.literal("\uE000"));
-                case TEXT -> sendPacket(player, Component.literal("None")
-                        .withStyle(style -> style.withColor(0xFF5555)));
-            }
-            return;
-        }
+        Core core = CoreRegistry.get(equippedType);
 
         // Checks if the core has active or passive abilities
         boolean hasPassiveFeature = core.getPassiveCooldown() > 0;

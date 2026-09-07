@@ -2,6 +2,7 @@ package de.ep.astralcores.event;
 
 import de.ep.astralcores.AstralCores;
 import de.ep.astralcores.advancement.criterion.CriterionRegistry;
+import de.ep.astralcores.core.Core;
 import de.ep.astralcores.core.CoreFactory;
 import de.ep.astralcores.core.CoreRegistry;
 import de.ep.astralcores.core.CoreType;
@@ -50,9 +51,8 @@ public class PlayerEventsListener {
                                         CoreType coreType = data.getEquippedCore();
 
                                         if (coreType != null) {
-                                            CoreRegistry.get(coreType).ifPresent(
-                                                    core -> core.onPlayerDisconnect(player)
-                                            );
+                                             Core core =  CoreRegistry.get(coreType);
+                                             core.onPlayerDisconnect(player);
                                         }
                                     }
 

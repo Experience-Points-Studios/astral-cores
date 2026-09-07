@@ -28,7 +28,7 @@ public class VoidSurvivalCriterion extends SimpleCriterionTrigger<VoidSurvivalCr
         int minBuildHeight = player.level().getMinY();
 
         // Add player to void tracking
-        if (player.getY() < minBuildHeight) {
+        if (player.getY() < minBuildHeight - 2) {
             playersInVoid.add(uuid);
             return;
         }

@@ -2,20 +2,23 @@ package de.ep.astralcores.core.respawn;
 
 import de.ep.astralcores.AstralCores;
 import de.ep.astralcores.core.Core;
+import de.ep.astralcores.core.CoreFactory;
 import de.ep.astralcores.core.CoreRegistry;
 import de.ep.astralcores.core.CoreType;
 import de.ep.astralcores.core.respawn.data.CoreRespawnData;
+import de.ep.astralcores.manager.AltarManager;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket;
+import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerBossEvent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.IdentityHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 // Handles active core respawn timers and their boss bars
 public class CoreRespawnManager {
@@ -34,16 +37,7 @@ public class CoreRespawnManager {
     public static void addRespawn(
             CoreType type
     ) {
-        Core core =
-                CoreRegistry
-                        .get(type)
-                        .orElseThrow(
-                                () ->
-                                        new IllegalStateException(
-                                                "No Core registered for type: "
-                                                        + type
-                                        )
-                        );
+        Core core = CoreRegistry.get(type);
 
         long startTimestamp =
                 System.currentTimeMillis() / 1000L;
@@ -152,16 +146,7 @@ public class CoreRespawnManager {
     private static ServerBossEvent createBossBar(
             CoreRespawnData respawn
     ) {
-        Core core =
-                CoreRegistry
-                        .get(respawn.type())
-                        .orElseThrow(
-                                () ->
-                                        new IllegalStateException(
-                                                "No Core registered for type: "
-                                                        + respawn.type()
-                                        )
-                        );
+        Core core = CoreRegistry.get(respawn.type());
 
         ServerBossEvent bossBar =
                 new ServerBossEvent(
@@ -263,15 +248,22 @@ public class CoreRespawnManager {
                         respawn.endTimestamp() - now
                 );
 
-        Core core =
-                CoreRegistry
-                        .get(respawn.type())
-                        .orElseThrow();
+        Core core = CoreRegistry.get(respawn.type());
+
+        Vec3 corePos = AltarManager.getCoreRespawnPos(
+                AstralCores.CORE_RESPAWN_DATA.getAltar()
+        );
 
         return Component.literal(
-                core.getName()
-                        + " respawning in "
-                        + formatTime(remaining)
+                core.getName().getString())
+                .append(" respawning in ")
+                .append(formatTime(remaining))
+                .append(" at ")
+                .append(String.valueOf((int) corePos.x))
+                .append(", ")
+                .append(String.valueOf((int) corePos.y))
+                .append(", ")
+                .append(String.valueOf((int) corePos.z)
         );
     }
 
@@ -336,12 +328,41 @@ public class CoreRespawnManager {
             return;
         }
 
+        ServerLevel level = AstralCores.getServer().overworld();
+        Vec3 corePos = AltarManager.getCoreRespawnPos(data.getAltar());
+        Core core = CoreRegistry.get(type);
+
+        ItemStack coreStack = CoreFactory.createStack(core);
+        ItemEntity coreEntity = new ItemEntity(level, corePos.x, corePos.y, corePos.z, coreStack);
+        coreEntity.setDeltaMovement(Vec3.ZERO);
+
+        level.addFreshEntity(coreEntity);
+
         AstralCores.LOGGER.info(
                 "Respawning core: {}",
                 type.name()
         );
 
-        // TODO: Spawn the core at the altar respawn position
+        Component title = Component.literal(
+                core.getName().getString())
+                .append(" has respawned at ")
+                .append(String.valueOf((int) corePos.x))
+                .append(", ")
+                .append(String.valueOf((int) corePos.y))
+                .append(", ")
+                .append(String.valueOf((int) corePos.z))
+                .withStyle(core.getName().getStyle());
+
+        for (ServerPlayer player : AstralCores.getServer().getPlayerList().getPlayers()) {
+
+            player.connection.send(
+                    new ClientboundSetTitleTextPacket(Component.empty())
+            );
+
+            player.connection.send(
+                    new ClientboundSetSubtitleTextPacket(title)
+            );
+        }
     }
 
     // Adds a newly joined player to every active boss bar

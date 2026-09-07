@@ -36,11 +36,7 @@ public class WithdrawCommandLogic {
             return 0;
         }
 
-        Core core = CoreRegistry.get(targetedType).orElse(null);
-        if (core == null) {
-            source.sendFailure(Component.literal("Your stored core type doesn't exist."));
-            return 0;
-        }
+        Core core = CoreRegistry.get(targetedType);
 
         // Cleans up passive buffs or modifiers before the core gets unequipped
         core.onRemoved(player);

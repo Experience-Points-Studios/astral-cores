@@ -7,6 +7,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Optional;
 
@@ -71,16 +72,13 @@ public class AltarManager {
         AstralCores.CORE_RESPAWN_DATA.removeAltar();
     }
 
-    public static Optional<BlockPos> getCoreRespawnPos() {
-        AltarData altar =
-                AstralCores.CORE_RESPAWN_DATA.getAltar();
+    public static Vec3 getCoreRespawnPos(AltarData altar) {
+        BlockPos pos = altar.pos();
 
-        if (altar == null) {
-            return Optional.empty();
-        }
-
-        return Optional.of(
-                altar.pos().offset(1, 1, 1)
+        return new Vec3(
+                pos.getX() + 2.5,
+                pos.getY() + 2.5,
+                pos.getZ() + 3.0
         );
     }
 }
