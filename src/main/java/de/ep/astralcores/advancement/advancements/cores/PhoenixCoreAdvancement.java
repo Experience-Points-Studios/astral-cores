@@ -18,11 +18,8 @@ import java.util.function.Consumer;
 
 public class PhoenixCoreAdvancement {
 
-    private static final String TIMER_ID =
-            "phoenix_core";
-
     private static final long REQUIRED_TICKS =
-            1L * 60L * 20L;
+            12L * 60L * 60L * 20L;
 
     private static final List<ResourceKey<Biome>> BIOMES = List.of(
             Biomes.NETHER_WASTES,

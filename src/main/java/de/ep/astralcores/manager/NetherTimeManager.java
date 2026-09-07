@@ -1,6 +1,5 @@
 package de.ep.astralcores.manager;
 
-import de.ep.astralcores.advancement.criterion.CriterionRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerScoreboard;
@@ -9,185 +8,74 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.scores.Objective;
 import net.minecraft.world.scores.ScoreAccess;
-import net.minecraft.world.scores.Scoreboard;
 import net.minecraft.world.scores.criteria.ObjectiveCriteria;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
-public class NetherTimeManager {
-
-    private static final int REQUIRED_TIME =
-            12 * 60 * 60 * 20;
+public final class NetherTimeManager {
 
     private static final String TIME_OBJECTIVE =
             "astralcores_nether_time";
 
-    private static final String START_OBJECTIVE =
-            "astralcores_nether_start";
-
-    private static final Map<UUID, ServerBossEvent> BOSS_BARS =
+    private static final Map<
+            UUID,
+            Map<Long, ServerBossEvent>
+            > BOSS_BARS =
             new HashMap<>();
 
-    private static final Set<UUID> COMPLETED =
-            new HashSet<>();
+    private NetherTimeManager() {
+    }
 
-    public static final int REQUIRED_TICKS =
-            12 * 60 * 60 * 20;
-
-    private static boolean initialized = false;
-
-    public static void init(
-            MinecraftServer server
+    public static int getOrAddEntry(
+            ServerPlayer player,
+            long requiredTicks
     ) {
+        if (player.level().dimension() != Level.NETHER) {
+            reset(player);
+            return 0;
+        }
 
-        if (initialized) {
-            return;
+        MinecraftServer server =
+                player.level().getServer();
+
+        if (server == null) {
+            return 0;
         }
 
         Objective objective =
-                getObjective(server);
+                getTimeObjective(server);
 
-        for (ServerPlayer player :
-                server.getPlayerList().getPlayers()) {
+        ScoreAccess score =
+                server.getScoreboard()
+                        .getOrCreatePlayerScore(
+                                player,
+                                objective
+                        );
 
-            int ticks =
-                    getTime(
-                            server,
-                            objective,
-                            player
-                    );
-
-            if (ticks >= REQUIRED_TIME) {
-                COMPLETED.add(
-                        player.getUUID()
+        int elapsed =
+                Math.max(
+                        0,
+                        score.get()
                 );
-            }
-        }
 
-        initialized = true;
+        elapsed++;
+
+        score.set(elapsed);
+
+        updateBossBar(
+                player,
+                requiredTicks,
+                elapsed
+        );
+
+        return elapsed;
     }
 
-    public static void tick(
+    private static Objective getTimeObjective(
             MinecraftServer server
     ) {
-
-        init(server);
-
-        Objective timeObjective =
-                getObjective(server);
-
-        Objective startObjective =
-                getStartObjective(server);
-
-        for (ServerPlayer player :
-                server.getPlayerList().getPlayers()) {
-
-            UUID uuid =
-                    player.getUUID();
-
-            if (COMPLETED.contains(uuid)) {
-
-                ServerBossEvent bossBar =
-                        BOSS_BARS.get(uuid);
-
-                if (bossBar != null) {
-                    bossBar.removePlayer(player);
-                }
-
-                continue;
-            }
-
-            if (player.level().dimension() != Level.NETHER) {
-
-                clearPlayer(
-                        server,
-                        player,
-                        timeObjective,
-                        startObjective
-                );
-
-                removeBossBar(uuid);
-
-                continue;
-            }
-
-            int elapsed =
-                    getTime(
-                            server,
-                            timeObjective,
-                            player
-                    );
-
-            int startAmount =
-                    getTime(
-                            server,
-                            startObjective,
-                            player
-                    );
-
-            if (startAmount == 0) {
-
-                setTime(
-                        server,
-                        startObjective,
-                        player,
-                        elapsed
-                );
-            }
-
-            elapsed =
-                    Math.min(
-                            REQUIRED_TIME,
-                            elapsed + 1
-                    );
-
-            setTime(
-                    server,
-                    timeObjective,
-                    player,
-                    elapsed
-            );
-
-            if (elapsed >= REQUIRED_TIME) {
-
-                COMPLETED.add(uuid);
-
-                CriterionRegistry.NETHER_TIME.trigger(
-                        player,
-                        elapsed
-                );
-
-                removeBossBar(uuid);
-
-                continue;
-            }
-
-            ServerBossEvent bossBar =
-                    BOSS_BARS.computeIfAbsent(
-                            uuid,
-                            id -> createBossBar()
-                    );
-
-            bossBar.addPlayer(player);
-
-            bossBar.setProgress(
-                    calculateProgress(elapsed)
-            );
-
-            bossBar.setName(
-                    createBossBarName(elapsed)
-            );
-        }
-    }
-
-    private static Objective getObjective(
-            MinecraftServer server
-    ) {
-
         ServerScoreboard scoreboard =
                 server.getScoreboard();
 
@@ -197,7 +85,6 @@ public class NetherTimeManager {
                 );
 
         if (objective == null) {
-
             objective =
                     scoreboard.addObjective(
                             TIME_OBJECTIVE,
@@ -214,41 +101,135 @@ public class NetherTimeManager {
         return objective;
     }
 
-    private static Objective getStartObjective(
-            MinecraftServer server
+    private static void updateBossBar(
+            ServerPlayer player,
+            long requiredTicks,
+            int elapsedTicks
     ) {
+        UUID uuid =
+                player.getUUID();
 
-        ServerScoreboard scoreboard =
-                server.getScoreboard();
-
-        Objective objective =
-                scoreboard.getObjective(
-                        START_OBJECTIVE
+        Map<Long, ServerBossEvent> playerBars =
+                BOSS_BARS.computeIfAbsent(
+                        uuid,
+                        ignored -> new HashMap<>()
                 );
 
-        if (objective == null) {
+        ServerBossEvent bossBar =
+                playerBars.computeIfAbsent(
+                        requiredTicks,
+                        ignored -> createBossBar(
+                                player,
+                                requiredTicks
+                        )
+                );
 
-            objective =
-                    scoreboard.addObjective(
-                            START_OBJECTIVE,
-                            ObjectiveCriteria.DUMMY,
-                            Component.literal(
-                                    "Nether Start"
-                            ),
-                            ObjectiveCriteria.RenderType.INTEGER,
-                            false,
-                            null
-                    );
-        }
+        bossBar.addPlayer(player);
 
-        return objective;
+        bossBar.setProgress(
+                calculateProgress(
+                        elapsedTicks,
+                        requiredTicks
+                )
+        );
+
+        bossBar.setName(
+                createBossBarName(
+                        elapsedTicks,
+                        requiredTicks
+                )
+        );
     }
 
-    private static int getTime(
-            MinecraftServer server,
-            Objective objective,
+    private static ServerBossEvent createBossBar(
+            ServerPlayer player,
+            long requiredTicks
+    ) {
+        ServerBossEvent bossBar =
+                new ServerBossEvent(
+                        UUID.randomUUID(),
+                        createBossBarName(
+                                0,
+                                requiredTicks
+                        ),
+                        ServerBossEvent.BossBarColor.RED,
+                        ServerBossEvent.BossBarOverlay.PROGRESS
+                );
+
+        bossBar.addPlayer(player);
+
+        return bossBar;
+    }
+
+    private static float calculateProgress(
+            int elapsedTicks,
+            long requiredTicks
+    ) {
+        if (requiredTicks <= 0) {
+            return 0.0F;
+        }
+
+        return Math.clamp(
+                1.0F -
+                        (float) elapsedTicks /
+                                (float) requiredTicks,
+                0.0F,
+                1.0F
+        );
+    }
+
+    private static Component createBossBarName(
+            int elapsedTicks,
+            long requiredTicks
+    ) {
+        long remaining =
+                Math.max(
+                        0L,
+                        requiredTicks - elapsedTicks
+                );
+
+        long totalSeconds =
+                remaining / 20L;
+
+        long hours =
+                totalSeconds / 3600L;
+
+        long minutes =
+                (totalSeconds % 3600L) / 60L;
+
+        long seconds =
+                totalSeconds % 60L;
+
+        return Component.literal(
+                "Nether Time: " +
+                        String.format(
+                                "%02d:%02d:%02d",
+                                hours,
+                                minutes,
+                                seconds
+                        )
+        );
+    }
+
+    public static int getElapsedTicks(
             ServerPlayer player
     ) {
+        MinecraftServer server =
+                player.level().getServer();
+
+        if (server == null) {
+            return 0;
+        }
+
+        Objective objective =
+                server.getScoreboard()
+                        .getObjective(
+                                TIME_OBJECTIVE
+                        );
+
+        if (objective == null) {
+            return 0;
+        }
 
         ScoreAccess score =
                 server.getScoreboard()
@@ -263,119 +244,50 @@ public class NetherTimeManager {
         );
     }
 
-    private static void setTime(
-            MinecraftServer server,
-            Objective objective,
-            ServerPlayer player,
-            int ticks
+    public static void reset(
+            ServerPlayer player
     ) {
+        MinecraftServer server =
+                player.level().getServer();
 
-        ScoreAccess score =
-                server.getScoreboard()
-                        .getOrCreatePlayerScore(
-                                player,
-                                objective
-                        );
-
-        score.set(
-                Math.max(
-                        0,
-                        ticks
-                )
-        );
-    }
-
-    private static void clearPlayer(
-            MinecraftServer server,
-            ServerPlayer player,
-            Objective timeObjective,
-            Objective startObjective
-    ) {
+        if (server == null) {
+            return;
+        }
 
         ServerScoreboard scoreboard =
                 server.getScoreboard();
 
-        scoreboard.resetSinglePlayerScore(
-                player,
-                timeObjective
-        );
-
-        scoreboard.resetSinglePlayerScore(
-                player,
-                startObjective
-        );
-
-        COMPLETED.remove(
-                player.getUUID()
-        );
-    }
-
-    private static ServerBossEvent createBossBar() {
-
-        return new ServerBossEvent(
-                UUID.randomUUID(),
-                Component.literal(
-                        "Nether Time"
-                ),
-                ServerBossEvent.BossBarColor.RED,
-                ServerBossEvent.BossBarOverlay.PROGRESS
-        );
-    }
-
-    private static float calculateProgress(
-            int elapsed
-    ) {
-
-        return Math.clamp(
-                1.0F -
-                        (float) elapsed /
-                                REQUIRED_TIME,
-                0.0F,
-                1.0F
-        );
-    }
-
-    private static Component createBossBarName(
-            int elapsed
-    ) {
-
-        int remaining =
-                Math.max(
-                        0,
-                        REQUIRED_TIME - elapsed
+        Objective objective =
+                scoreboard.getObjective(
+                        TIME_OBJECTIVE
                 );
 
-        int totalSeconds =
-                remaining / 20;
+        if (objective != null) {
+            scoreboard.resetSinglePlayerScore(
+                    player,
+                    objective
+            );
+        }
 
-        int hours =
-                totalSeconds / 3600;
-
-        int minutes =
-                (totalSeconds % 3600) / 60;
-
-        int seconds =
-                totalSeconds % 60;
-
-        return Component.literal(
-                "Nether Time: " +
-                        String.format(
-                                "%02d:%02d:%02d",
-                                hours,
-                                minutes,
-                                seconds
-                        )
-        );
+        removeBossBars(player);
     }
 
-    private static void removeBossBar(
-            UUID uuid
+    private static void removeBossBars(
+            ServerPlayer player
     ) {
+        UUID uuid =
+                player.getUUID();
 
-        ServerBossEvent bossBar =
+        Map<Long, ServerBossEvent> playerBars =
                 BOSS_BARS.remove(uuid);
 
-        if (bossBar != null) {
+        if (playerBars == null) {
+            return;
+        }
+
+        for (ServerBossEvent bossBar :
+                playerBars.values()) {
+
             bossBar.removeAllPlayers();
         }
     }
@@ -383,68 +295,50 @@ public class NetherTimeManager {
     public static void removePlayer(
             ServerPlayer player
     ) {
-
-        removeBossBar(
-                player.getUUID()
-        );
+        removeBossBars(player);
     }
 
-    public static void onServerStopping(
-            MinecraftServer server
-    ) {
-
-        for (ServerBossEvent bossBar :
+    public static void onServerStopping() {
+        for (Map<Long, ServerBossEvent> playerBars :
                 BOSS_BARS.values()) {
 
-            bossBar.removeAllPlayers();
+            for (ServerBossEvent bossBar :
+                    playerBars.values()) {
+
+                bossBar.removeAllPlayers();
+            }
         }
 
         BOSS_BARS.clear();
-
-        COMPLETED.clear();
-
-        initialized = false;
     }
 
     public static void clear(
             MinecraftServer server
     ) {
-
-        Scoreboard scoreboard =
+        ServerScoreboard scoreboard =
                 server.getScoreboard();
 
-        Objective timeObjective =
+        Objective objective =
                 scoreboard.getObjective(
                         TIME_OBJECTIVE
                 );
 
-        Objective startObjective =
-                scoreboard.getObjective(
-                        START_OBJECTIVE
-                );
-
-        if (timeObjective != null) {
+        if (objective != null) {
             scoreboard.removeObjective(
-                    timeObjective
+                    objective
             );
         }
 
-        if (startObjective != null) {
-            scoreboard.removeObjective(
-                    startObjective
-            );
-        }
-
-        COMPLETED.clear();
-
-        for (ServerBossEvent bossBar :
+        for (Map<Long, ServerBossEvent> playerBars :
                 BOSS_BARS.values()) {
 
-            bossBar.removeAllPlayers();
+            for (ServerBossEvent bossBar :
+                    playerBars.values()) {
+
+                bossBar.removeAllPlayers();
+            }
         }
 
         BOSS_BARS.clear();
-
-        initialized = false;
     }
 }

@@ -8,5 +8,6 @@ public final class CriterionTickManager {
 
     public static void tick(ServerPlayer player) {
         CriterionRegistry.VOID_SURVIVAL.trigger(player);
+        CriterionRegistry.NETHER_TIME.trigger(player);
         }
 }

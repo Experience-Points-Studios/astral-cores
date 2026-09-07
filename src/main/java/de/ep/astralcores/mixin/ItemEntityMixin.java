@@ -25,44 +25,11 @@ public abstract class ItemEntityMixin {
     @Shadow
     private int age;
 
-    // Set despawn timer for core items to 0 every tick
-    @Inject(method = "tick", at = @At("HEAD"))
-    private void astralcores$preventCoreDespawn(
-            CallbackInfo ci
-    ) {
-        ItemStack stack =
-                this.getItem();
-
-        if (CoreFactory.isCore(stack)) {
-            this.age = 0;
-        }
-    }
-
-    // Prevent cores from being destroyed by normal damage
+    // Handles core item ticking and prevents normal despawn.
     @Inject(
-            method = "hurtServer",
-            at = @At("HEAD"),
-            cancellable = true
+            method = "tick",
+            at = @At("HEAD")
     )
-    private void astralcores$handleCoreDamageAndVoid(
-            ServerLevel level,
-            DamageSource source,
-            float damage,
-            CallbackInfoReturnable<Boolean> cir
-    ) {
-        ItemStack stack =
-                this.getItem();
-
-        if (!CoreFactory.isCore(stack)) {
-            return;
-        }
-
-        // Cancel all normal damage sources for core items
-        cir.setReturnValue(false);
-    }
-
-    // Handles core-specific item ticking and void respawns
-    @Inject(method = "tick", at = @At("HEAD"))
     private void astralcores$handleCoreTick(
             CallbackInfo ci
     ) {
@@ -76,9 +43,16 @@ public abstract class ItemEntityMixin {
             return;
         }
 
-        // Core has fallen into the void
-        if (!entity.level().isClientSide()
-                && entity.getY()
+        // Core items never despawn normally.
+        this.age = 0;
+
+        // Client does not handle core respawns.
+        if (entity.level().isClientSide()) {
+            return;
+        }
+
+        // Core has fallen into the void.
+        if (entity.getY()
                 < entity.level().getMinY() - 64) {
 
             Optional<Core> core =
@@ -92,13 +66,26 @@ public abstract class ItemEntityMixin {
                     core.get().getType()
             );
 
-
             entity.discard();
+        }
+    }
 
+    // Prevents cores from being destroyed by normal damage.
+    @Inject(
+            method = "hurtServer",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void astralcores$preventCoreDamage(
+            ServerLevel level,
+            DamageSource source,
+            float damage,
+            CallbackInfoReturnable<Boolean> cir
+    ) {
+        if (!CoreFactory.isCore(this.getItem())) {
             return;
         }
 
-        // Prevent normal item despawn
-        this.age = 0;
+        cir.setReturnValue(false);
     }
 }

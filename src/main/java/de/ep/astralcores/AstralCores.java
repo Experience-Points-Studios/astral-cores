@@ -46,10 +46,6 @@ public class AstralCores implements ModInitializer {
 		MainLoop.register();
 
 		CriterionRegistry.init();
-
-		ServerLifecycleEvents.SERVER_STOPPING.register(
-				NetherTimeManager::onServerStopping
-		);
 	}
 
 	public static void setServer(MinecraftServer minecraftServer) {

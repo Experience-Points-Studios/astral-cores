@@ -36,8 +36,6 @@ public class MainLoop {
     // Loop that runs every servertick
     private static void oneTickLoop(MinecraftServer server) {
 
-        NetherTimeManager.tick(server);
-
         CoreRespawnManager.tick();
 
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {

@@ -2,6 +2,7 @@ package de.ep.astralcores.advancement.criterion.criterions;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.ep.astralcores.manager.NetherTimeManager;
 import net.minecraft.advancements.predicates.ContextAwarePredicate;
 import net.minecraft.advancements.triggers.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,21 +19,28 @@ public class NetherTimeCriterion
     }
 
     public void trigger(
-            ServerPlayer player,
-            long elapsedTicks
+            ServerPlayer player
     ) {
         if (player.level().dimension() != Level.NETHER) {
+            NetherTimeManager.reset(player);
             return;
         }
 
-        long finalElapsedTicks =
-                elapsedTicks;
-
         this.trigger(
                 player,
-                conditions ->
-                        finalElapsedTicks >=
-                                conditions.requiredTicks()
+                conditions -> {
+
+                    long requiredTicks =
+                            conditions.requiredTicks();
+
+                    int elapsedTicks =
+                            NetherTimeManager.getOrAddEntry(
+                                    player,
+                                    requiredTicks
+                            );
+
+                    return elapsedTicks >= requiredTicks;
+                }
         );
     }
 
@@ -44,6 +52,7 @@ public class NetherTimeCriterion
         public static final Codec<Conditions> CODEC =
                 RecordCodecBuilder.create(instance ->
                         instance.group(
+
                                 ContextAwarePredicate.CODEC
                                         .optionalFieldOf("player")
                                         .forGetter(
@@ -55,6 +64,7 @@ public class NetherTimeCriterion
                                         .forGetter(
                                                 Conditions::requiredTicks
                                         )
+
                         ).apply(
                                 instance,
                                 Conditions::new
