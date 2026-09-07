@@ -50,7 +50,7 @@ public class BerserkerCore extends Core {
                         Component.literal("Kills restore 4 hearts and grant Speed II and Strength III.")
                                 .withStyle(ChatFormatting.GRAY)
                 ),
-                10011,
+                10002,
                 300,
                 0,
                 86400L,

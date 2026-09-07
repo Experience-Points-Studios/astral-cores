@@ -50,7 +50,7 @@ public class MagnetCore extends Core {
                         Component.literal("Critical hits can freeze an enemy's attack for 1.5 seconds.")
                                 .withStyle(ChatFormatting.GRAY)
                 ),
-                10012,
+                10010,
                 0,
                 0,
                 86400L,

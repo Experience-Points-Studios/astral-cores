@@ -19,7 +19,7 @@ public class LeviathanCore extends Core {
                 CoreType.LEVIATHAN_CORE,
                 Component.literal("Leviathan Core")
                         .withStyle(style -> style.withColor(0x0055FF)),
-                Items.TIPPED_ARROW,
+                Items.HEART_OF_THE_SEA,
                 List.of(
                         Component.literal("A fragment of the core of a fallen meteor, awakened beneath the deepest waters.")
                                 .withStyle(ChatFormatting.GRAY),
