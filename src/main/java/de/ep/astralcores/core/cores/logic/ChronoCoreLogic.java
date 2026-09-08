@@ -3,8 +3,10 @@ package de.ep.astralcores.core.cores.logic;
 import com.mojang.datafixers.util.Pair;
 import de.ep.astralcores.AstralCores;
 import de.ep.astralcores.core.Core;
+import de.ep.astralcores.core.CoreFactory;
 import de.ep.astralcores.core.CoreRegistry;
 import de.ep.astralcores.core.CoreType;
+import de.ep.astralcores.core.cores.ChronoCore;
 import de.ep.astralcores.core.data.CoreActivationResult;
 import de.ep.astralcores.manager.CoreCooldownManager;
 import de.ep.astralcores.playerdata.PlayerData;
@@ -18,6 +20,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
@@ -187,13 +190,9 @@ public class ChronoCoreLogic {
             );
         }
 
-        // Fetches the core base item.
-        Item registeredItem = CoreRegistry
-                .get(CoreType.CHRONO_CORE)
-                .getBaseItem();
 
         // Builds a temporary item stack configured with death protection attributes.
-        ItemStack fakeCoreItem = new ItemStack(registeredItem);
+        ItemStack fakeCoreItem = CoreFactory.createStack(CoreRegistry.get(CoreType.CHRONO_CORE));
         fakeCoreItem.set(DataComponents.DEATH_PROTECTION, new DeathProtection(List.of()));
 
         // Sends a fake packet showing the item in the player off-hand slot.
@@ -208,7 +207,7 @@ public class ChronoCoreLogic {
         // Instantly restores the real server off-hand item data to correct the client HUD display.
         player.connection.send(new ClientboundSetEquipmentPacket(
                 player.getId(),
-                List.of(Pair.of(EquipmentSlot.OFFHAND, player.getItemInHand(net.minecraft.world.InteractionHand.OFF_HAND)))
+                List.of(Pair.of(EquipmentSlot.OFFHAND, player.getItemInHand(InteractionHand.OFF_HAND)))
         ));
     }
 
