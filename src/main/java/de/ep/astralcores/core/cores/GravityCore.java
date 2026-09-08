@@ -18,7 +18,7 @@ public final class GravityCore extends Core {
         super(
                 CoreType.GRAVITY_CORE,
                 Component.literal("Gravity Core")
-                        .withStyle(style -> style.withColor(0xAA00AA)),
+                        .withStyle(style -> style.withColor(0xCC6600)),
                 Items.NETHERITE_INGOT,
                 List.of(
                         Component.literal("A fragment of the core of a fallen meteor.")
@@ -27,12 +27,12 @@ public final class GravityCore extends Core {
 
                         Component.literal("Active")
                                 .withStyle(style -> style
-                                        .withColor(0x550055)
+                                        .withColor(0x663300)
                                         .withBold(true)
                                         .withItalic(true)),
                         Component.literal("Gravity Pull")
                                 .withStyle(style -> style
-                                        .withColor(0xFF55FF)
+                                        .withColor(0xFF8844)
                                         .withBold(true)),
                         Component.literal("Pulls nearby players toward you.")
                                 .withStyle(ChatFormatting.GRAY),
@@ -40,12 +40,12 @@ public final class GravityCore extends Core {
 
                         Component.literal("Passive")
                                 .withStyle(style -> style
-                                        .withColor(0x550055)
+                                        .withColor(0x663300)
                                         .withBold(true)
                                         .withItalic(true)),
                         Component.literal("Heavy Presence")
                                 .withStyle(style -> style
-                                        .withColor(0xFF55FF)
+                                        .withColor(0xFF8844)
                                         .withBold(true)),
                         Component.literal("50% knockback resistance.")
                                 .withStyle(ChatFormatting.GRAY)
@@ -57,7 +57,7 @@ public final class GravityCore extends Core {
                 "Gravity Pull",
                 "Heavy Presence",
                 "\uE004",
-                BossEvent.BossBarColor.WHITE
+                BossEvent.BossBarColor.YELLOW
         );
     }
 

@@ -13,11 +13,12 @@ import net.minecraft.world.item.Items;
 import java.util.List;
 
 public class AeroCore extends Core {
+
     public AeroCore() {
         super(
                 CoreType.AERO_CORE,
                 Component.literal("Aero Core")
-                        .withStyle(style -> style.withColor(0x5555FF)),
+                        .withStyle(style -> style.withColor(0x7777DD)),
                 Items.FEATHER,
                 List.of(
                         Component.literal("A fragment of the core of a fallen meteor.")
@@ -26,12 +27,12 @@ public class AeroCore extends Core {
 
                         Component.literal("Active")
                                 .withStyle(style -> style
-                                        .withColor(0x333399)
+                                        .withColor(0x444477)
                                         .withBold(true)
                                         .withItalic(true)),
                         Component.literal("Tornado Lift")
                                 .withStyle(style -> style
-                                        .withColor(0x9999FF)
+                                        .withColor(0xAAAAEE)
                                         .withBold(true)),
                         Component.literal("Launches nearby enemies into the air with a violent updraft.")
                                 .withStyle(ChatFormatting.GRAY),
@@ -39,12 +40,12 @@ public class AeroCore extends Core {
 
                         Component.literal("Passive")
                                 .withStyle(style -> style
-                                        .withColor(0x333399)
+                                        .withColor(0x444477)
                                         .withBold(true)
                                         .withItalic(true)),
                         Component.literal("Featherweight")
                                 .withStyle(style -> style
-                                        .withColor(0x9999FF)
+                                        .withColor(0xAAAAEE)
                                         .withBold(true)),
                         Component.literal("Immune to fall damage. Landing damages nearby enemies.")
                                 .withStyle(ChatFormatting.GRAY)
