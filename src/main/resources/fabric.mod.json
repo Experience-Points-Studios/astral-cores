@@ -3,16 +3,16 @@
 	"id": "astralcores",
 	"version": "${version}",
 	"name": "Astral Cores",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "This Mod adds 12 custom items with powerful abilities into Minecraft.",
 	"authors": [
 		"Mr Panda",
 		"aEternalCatGod"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/project/astral-cores,,,
+		"sources": "https://github.com/Experience-Points-Studios/astral-cores"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/astralcores/icon.png",
 	"environment": "*",
 	"entrypoints": {
