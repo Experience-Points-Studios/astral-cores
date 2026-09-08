@@ -6,6 +6,7 @@ import de.ep.astralcores.AstralCores;
 import de.ep.astralcores.actionbar.ActionBarManager;
 import de.ep.astralcores.core.*;
 import de.ep.astralcores.playerdata.PlayerData;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -56,8 +57,9 @@ public class WithdrawCommandLogic {
         }
 
         source.sendSuccess(() -> Component.literal("Successfully withdrew ")
-                .append(core.getName())
-                .append(" back to your inventory."),
+                        .append(core.getName())
+                        .append(" back to your inventory.")
+                        .withStyle(ChatFormatting.GREEN),
                 true);
         return 1;
     }

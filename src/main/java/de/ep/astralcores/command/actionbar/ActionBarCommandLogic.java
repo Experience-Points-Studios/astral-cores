@@ -5,6 +5,7 @@ import de.ep.astralcores.AstralCores;
 import de.ep.astralcores.actionbar.ActionBarManager;
 import de.ep.astralcores.actionbar.ActionBarMode;
 import de.ep.astralcores.playerdata.PlayerData;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -71,7 +72,8 @@ public class ActionBarCommandLogic {
                         )
                         .append(
                                 mode.name().toLowerCase()
-                        ),
+                        )
+                        .withStyle(ChatFormatting.GREEN),
                 false
         );
 
