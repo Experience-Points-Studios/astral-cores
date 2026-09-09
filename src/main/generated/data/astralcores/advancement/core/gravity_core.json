@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "has_128_anvils": {
+      "conditions": {
+        "count": 128,
+        "item": "minecraft:anvil"
+      },
+      "trigger": "astralcores:has_item_count"
+    }
+  },
+  "display": {
+    "description": "Get 2 stacks of Anvils",
+    "frame": "challenge",
+    "icon": {
+      "id": "minecraft:anvil"
+    },
+    "title": "That's heavy!"
+  },
+  "requirements": [
+    [
+      "has_128_anvils"
+    ]
+  ],
+  "rewards": {
+    "function": "astralcores:core/gravity_core"
+  },
+  "sends_telemetry_event": true
+}

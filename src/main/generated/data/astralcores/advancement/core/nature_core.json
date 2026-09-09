@@ -1,0 +1,298 @@
+{
+  "criteria": {
+    "acacia_sapling": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:acacia_sapling"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "allium": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:allium"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "azalea": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:azalea"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "azure_bluet": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:azure_bluet"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "birch_sapling": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:birch_sapling"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "blue_orchid": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:blue_orchid"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "cherry_sapling": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:cherry_sapling"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "closed_eyeblossom": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:closed_eyeblossom"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "cornflower": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:cornflower"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "dandelion": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:dandelion"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "dark_oak_sapling": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:dark_oak_sapling"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "jungle_sapling": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:jungle_sapling"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "lily_of_the_valley": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:lily_of_the_valley"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "mangrove_propagule": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:mangrove_propagule"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "oak_sapling": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:oak_sapling"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "open_eyeblossom": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:open_eyeblossom"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "orange_tulip": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:orange_tulip"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "oxeye_daisy": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:oxeye_daisy"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "pale_oak_sapling": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:pale_oak_sapling"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "pink_tulip": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:pink_tulip"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "poppy": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:poppy"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "red_tulip": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:red_tulip"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "rose_bush": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:rose_bush"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "spore_blossom": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:spore_blossom"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "spruce_sapling": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:spruce_sapling"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "sunflower": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:sunflower"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "torchflower": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:torchflower"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
+    "white_tulip": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:white_tulip"
+      },
+      "trigger": "astralcores:has_item_count"
+    }
+  },
+  "display": {
+    "description": "Collect every flower and sapling from the Overworld",
+    "frame": "challenge",
+    "icon": {
+      "id": "minecraft:oak_leaves"
+    },
+    "title": "Best Botanic"
+  },
+  "requirements": [
+    [
+      "allium"
+    ],
+    [
+      "azure_bluet"
+    ],
+    [
+      "blue_orchid"
+    ],
+    [
+      "cornflower"
+    ],
+    [
+      "dandelion"
+    ],
+    [
+      "open_eyeblossom"
+    ],
+    [
+      "closed_eyeblossom"
+    ],
+    [
+      "lily_of_the_valley"
+    ],
+    [
+      "oxeye_daisy"
+    ],
+    [
+      "poppy"
+    ],
+    [
+      "rose_bush"
+    ],
+    [
+      "spore_blossom"
+    ],
+    [
+      "sunflower"
+    ],
+    [
+      "torchflower"
+    ],
+    [
+      "red_tulip"
+    ],
+    [
+      "orange_tulip"
+    ],
+    [
+      "pink_tulip"
+    ],
+    [
+      "white_tulip"
+    ],
+    [
+      "acacia_sapling"
+    ],
+    [
+      "azalea"
+    ],
+    [
+      "birch_sapling"
+    ],
+    [
+      "cherry_sapling"
+    ],
+    [
+      "dark_oak_sapling"
+    ],
+    [
+      "jungle_sapling"
+    ],
+    [
+      "mangrove_propagule"
+    ],
+    [
+      "oak_sapling"
+    ],
+    [
+      "pale_oak_sapling"
+    ],
+    [
+      "spruce_sapling"
+    ]
+  ],
+  "rewards": {
+    "function": "astralcores:core/nature_core"
+  },
+  "sends_telemetry_event": true
+}

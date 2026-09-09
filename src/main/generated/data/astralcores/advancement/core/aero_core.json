@@ -1,0 +1,44 @@
+{
+  "criteria": {
+    "pig_altitude": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "position": {
+                  "y": {
+                    "min": 5000.0
+                  }
+                }
+              },
+              "minecraft:vehicle": {
+                "minecraft:entity_type": "minecraft:pig"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": "Ride a pig above Y=5000.",
+    "frame": "challenge",
+    "icon": {
+      "id": "minecraft:wind_charge"
+    },
+    "title": "Sky Pig"
+  },
+  "requirements": [
+    [
+      "pig_altitude"
+    ]
+  ],
+  "rewards": {
+    "function": "astralcores:core/aero_core"
+  },
+  "sends_telemetry_event": true
+}
