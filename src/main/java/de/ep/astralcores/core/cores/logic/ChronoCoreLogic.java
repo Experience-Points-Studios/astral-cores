@@ -96,7 +96,7 @@ public class ChronoCoreLogic {
         // Check if enough position history exists.
         if (target == null) {
             player.sendSystemMessage(
-                    Component.literal("[Chrono Core] Not enough time history!")
+                    Component.literal("Not enough time history!")
                             .withStyle(ChatFormatting.RED)
             );
             return CoreActivationResult.FAILED;

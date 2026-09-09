@@ -47,7 +47,7 @@ public class ActionBarManager {
                     ? Component.literal("Ready ")
                     .withStyle(style -> style.withColor(0x55FF55))
                     : Component.literal(formatTime(passiveRemaining) + " ")
-                    .withStyle(style -> style.withColor(0xFFAA00));
+                    .withStyle(style -> style.withColor(0xFF5555));
         }
 
         // Formats the active ability status string
