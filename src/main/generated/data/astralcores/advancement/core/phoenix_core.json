@@ -32,9 +32,9 @@
       },
       "trigger": "minecraft:location"
     },
-    "nether_time": {
+    "nether_12_hours": {
       "conditions": {
-        "required_ticks": 864000
+        "required_time": 43200000
       },
       "trigger": "astralcores:nether_time"
     },
@@ -88,7 +88,7 @@
     }
   },
   "display": {
-    "description": "Be for 12h in the nether and visit every nether biome",
+    "description": "Be for 12 hours in the nether and visit every nether biome",
     "frame": "challenge",
     "icon": {
       "id": "minecraft:blaze_powder"
@@ -112,7 +112,7 @@
       "basalt_deltas"
     ],
     [
-      "nether_time"
+      "nether_12_hours"
     ]
   ],
   "rewards": {

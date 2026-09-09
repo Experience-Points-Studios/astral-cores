@@ -1,6 +1,7 @@
 package de.ep.astralcores.util;
 
 import de.ep.astralcores.AstralCores;
+import de.ep.astralcores.advancement.trigger.triggers.EntityKilledTrigger;
 import de.ep.astralcores.advancement.trigger.triggers.HasItemCountTrigger;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.predicates.ItemPredicate;
@@ -14,6 +15,7 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.advancements.predicates.MinMaxBounds;
@@ -75,5 +77,14 @@ public final class AdvancementUtil {
                                 "core/" + core
                         )
                 );
+    }
+    public static Criterion<?> entityKilled(
+            EntityType<?> entity,
+            int count
+    ) {
+        return EntityKilledTrigger.TriggerInstance.killedEntity(
+                entity,
+                count
+        );
     }
 }
