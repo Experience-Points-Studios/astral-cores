@@ -1,21 +1,25 @@
-package de.ep.astralcores.advancement.criterion;
+package de.ep.astralcores.advancement.trigger;
 
 import de.ep.astralcores.AstralCores;
-import de.ep.astralcores.advancement.criterion.criterions.NetherTimeCriterion;
-import de.ep.astralcores.advancement.criterion.criterions.VoidSurvivalCriterion;
+import de.ep.astralcores.advancement.trigger.triggers.HasItemCountTrigger;
+import de.ep.astralcores.advancement.trigger.triggers.NetherTimeTrigger;
+import de.ep.astralcores.advancement.trigger.triggers.VoidSurvivalTrigger;
 import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 
 
-public class CriterionRegistry {
+public class TriggerRegistry {
 
-    public static final VoidSurvivalCriterion VOID_SURVIVAL =
-            register("void_survival", new VoidSurvivalCriterion());
+    public static final VoidSurvivalTrigger VOID_SURVIVAL =
+            register("void_survival", new VoidSurvivalTrigger());
 
-    public static final NetherTimeCriterion NETHER_TIME =
-            register("nether_time", new NetherTimeCriterion());
+    public static final NetherTimeTrigger NETHER_TIME =
+            register("nether_time", new NetherTimeTrigger());
+
+    public static final HasItemCountTrigger HAS_ITEM_COUNT =
+            register("has_item_count", new HasItemCountTrigger());
 
 
     private static <T extends CriterionTrigger<?>> T register(

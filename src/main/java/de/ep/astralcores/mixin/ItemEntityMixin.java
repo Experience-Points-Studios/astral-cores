@@ -1,11 +1,14 @@
 package de.ep.astralcores.mixin;
 
+import de.ep.astralcores.advancement.trigger.TriggerRegistry;
 import de.ep.astralcores.core.Core;
 import de.ep.astralcores.core.CoreFactory;
 import de.ep.astralcores.core.respawn.CoreRespawnManager;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -87,5 +90,21 @@ public abstract class ItemEntityMixin {
         }
 
         cir.setReturnValue(false);
+    }
+
+    @Inject(
+            method = "playerTouch(Lnet/minecraft/world/entity/player/Player;)V",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/entity/player/Player;take(Lnet/minecraft/world/entity/Entity;I)V",
+                    shift = At.Shift.AFTER
+            )
+    )
+    private void onPlayerPickupItem(Player player, CallbackInfo ci) {
+
+        if (player instanceof ServerPlayer serverPlayer) {
+
+            TriggerRegistry.HAS_ITEM_COUNT.trigger(serverPlayer);
+        }
     }
 }

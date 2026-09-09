@@ -1,11 +1,10 @@
 package de.ep.astralcores;
 
-import de.ep.astralcores.manager.NetherTimeManager;
 import de.ep.astralcores.core.respawn.CoreRespawnManager;
 import de.ep.astralcores.manager.CoreCooldownManager;
 import de.ep.astralcores.manager.CoreTickManager;
 import de.ep.astralcores.actionbar.ActionBarManager;
-import de.ep.astralcores.manager.CriterionTickManager;
+import de.ep.astralcores.manager.TriggerManager;
 import de.ep.astralcores.playerdata.PlayerData;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import org.jspecify.annotations.NonNull;
@@ -40,7 +39,7 @@ public class MainLoop {
 
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
 
-            CriterionTickManager.tick(player);
+            TriggerManager.tick(player);
 
             PlayerData data = AstralCores.PLAYER_DATA.get(player);
             // Applies the cores tick function

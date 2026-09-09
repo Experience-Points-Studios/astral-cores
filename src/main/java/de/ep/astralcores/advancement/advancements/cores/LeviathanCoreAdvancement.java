@@ -33,7 +33,7 @@ public class LeviathanCoreAdvancement {
                 .display(
                         Blocks.CONDUIT,
                         Component.literal("What a breath"),
-                        Component.literal("Have Conduit Power, Water breathing & Dolphins Grace"),
+                        Component.literal("Have Conduit Power, Water breathing & Dolphins Grace at the same time."),
                         null,
                         AdvancementType.CHALLENGE,
                         true,

@@ -1,7 +1,7 @@
 package de.ep.astralcores.advancement.advancements.cores;
 
-import de.ep.astralcores.advancement.criterion.CriterionRegistry;
-import de.ep.astralcores.advancement.criterion.criterions.VoidSurvivalCriterion;
+import de.ep.astralcores.advancement.trigger.TriggerRegistry;
+import de.ep.astralcores.advancement.trigger.triggers.VoidSurvivalTrigger;
 import de.ep.astralcores.util.AdvancementUtil;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
@@ -37,8 +37,8 @@ public class ShadowCoreAdvancement {
                 )
                 .addCriterion(
                         "void_survival",
-                        CriterionRegistry.VOID_SURVIVAL.createCriterion(
-                                new VoidSurvivalCriterion.Conditions(
+                        TriggerRegistry.VOID_SURVIVAL.createCriterion(
+                                new VoidSurvivalTrigger.Conditions(
                                         Optional.empty()
                                 )
                         )

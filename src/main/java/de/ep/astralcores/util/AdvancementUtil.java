@@ -1,6 +1,7 @@
 package de.ep.astralcores.util;
 
 import de.ep.astralcores.AstralCores;
+import de.ep.astralcores.advancement.trigger.triggers.HasItemCountTrigger;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.predicates.ItemPredicate;
 import net.minecraft.advancements.predicates.LocationPredicate;
@@ -15,6 +16,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.advancements.predicates.MinMaxBounds;
+
 
 public final class AdvancementUtil {
 
@@ -25,9 +28,10 @@ public final class AdvancementUtil {
         );
     }
 
-    public static Criterion<?> hasItem(
+    public static Criterion<?> hasItemsUpToStack(
             HolderLookup.Provider lookup,
-            Item item
+            Item item,
+            int minCount
     ) {
         return InventoryChangeTrigger.TriggerInstance.hasItems(
                 ItemPredicate.Builder.item()
@@ -35,6 +39,17 @@ public final class AdvancementUtil {
                                 lookup.lookupOrThrow(Registries.ITEM),
                                 item
                         )
+                        .withCount(MinMaxBounds.Ints.atLeast(minCount))
+        );
+    }
+
+    public static Criterion<?> hasItemTotal(
+            Item item,
+            int count
+    ) {
+        return HasItemCountTrigger.TriggerInstance.hasItem(
+                item,
+                count
         );
     }
 

@@ -1,7 +1,7 @@
 package de.ep.astralcores.event;
 
 import de.ep.astralcores.AstralCores;
-import de.ep.astralcores.advancement.criterion.CriterionRegistry;
+import de.ep.astralcores.advancement.trigger.TriggerRegistry;
 import de.ep.astralcores.core.Core;
 import de.ep.astralcores.core.CoreFactory;
 import de.ep.astralcores.core.CoreRegistry;
@@ -10,6 +10,7 @@ import de.ep.astralcores.core.cores.logic.*;
 import de.ep.astralcores.core.respawn.CoreRespawnManager;
 import de.ep.astralcores.event.logic.CoreDeathLogic;
 import de.ep.astralcores.event.logic.CoreInteractLogic;
+import de.ep.astralcores.manager.TriggerManager;
 import de.ep.astralcores.playerdata.PlayerData;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
@@ -63,7 +64,7 @@ public class PlayerEventsListener {
                                 CoreRespawnManager.removePlayer(player);
 
                                 // Remove player from void tracking data
-                                CriterionRegistry.VOID_SURVIVAL.removePlayer(player.getUUID());
+                                TriggerManager.onPlayerDisconnect(player);
                             }
                     );
                 }
@@ -72,7 +73,7 @@ public class PlayerEventsListener {
         // Clear tracking data when player respawns after death
         ServerPlayerEvents.AFTER_RESPAWN.register(
                 (oldPlayer, newPlayer, alive) -> {
-                    CriterionRegistry.VOID_SURVIVAL.removePlayer(newPlayer.getUUID());
+                    TriggerRegistry.VOID_SURVIVAL.removePlayer(newPlayer.getUUID());
                 }
         );
 

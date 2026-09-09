@@ -1,7 +1,6 @@
 package de.ep.astralcores;
 
-import de.ep.astralcores.manager.NetherTimeManager;
-import de.ep.astralcores.advancement.criterion.CriterionRegistry;
+import de.ep.astralcores.advancement.trigger.TriggerRegistry;
 import de.ep.astralcores.command.CommandRegistry;
 import de.ep.astralcores.core.respawn.CoreRespawnDataManager;
 import de.ep.astralcores.event.PlayerEventsListener;
@@ -9,7 +8,6 @@ import de.ep.astralcores.event.ServerLifecycleEventsListener;
 import de.ep.astralcores.playerdata.PlayerDataManager;
 import de.ep.astralcores.core.CoreRegistry;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +43,7 @@ public class AstralCores implements ModInitializer {
 		// Registers the Mainloop
 		MainLoop.register();
 
-		CriterionRegistry.init();
+		TriggerRegistry.init();
 	}
 
 	public static void setServer(MinecraftServer minecraftServer) {

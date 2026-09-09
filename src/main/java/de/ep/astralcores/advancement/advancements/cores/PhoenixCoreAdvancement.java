@@ -1,7 +1,7 @@
 package de.ep.astralcores.advancement.advancements.cores;
 
-import de.ep.astralcores.advancement.criterion.CriterionRegistry;
-import de.ep.astralcores.advancement.criterion.criterions.NetherTimeCriterion;
+import de.ep.astralcores.advancement.trigger.TriggerRegistry;
+import de.ep.astralcores.advancement.trigger.triggers.NetherTimeTrigger;
 import de.ep.astralcores.util.AdvancementUtil;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
@@ -51,7 +51,7 @@ public class PhoenixCoreAdvancement {
                                         "Hot Living"
                                 ),
                                 Component.literal(
-                                        "Be for 1 minute in the nether and visit every nether biome"
+                                        "Be for 12h in the nether and visit every nether biome"
                                 ),
                                 null,
                                 AdvancementType.CHALLENGE,
@@ -73,8 +73,8 @@ public class PhoenixCoreAdvancement {
         builder
                 .addCriterion(
                         "nether_time",
-                        CriterionRegistry.NETHER_TIME.createCriterion(
-                                NetherTimeCriterion.Conditions.create(
+                        TriggerRegistry.NETHER_TIME.createCriterion(
+                                NetherTimeTrigger.Conditions.create(
                                         REQUIRED_TICKS
                                 )
                         )

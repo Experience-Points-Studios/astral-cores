@@ -1,4 +1,4 @@
-package de.ep.astralcores.advancement.criterion.criterions;
+package de.ep.astralcores.advancement.trigger.triggers;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.advancements.predicates.ContextAwarePredicate;
@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-public class VoidSurvivalCriterion extends SimpleCriterionTrigger<VoidSurvivalCriterion.Conditions> {
+public class VoidSurvivalTrigger extends SimpleCriterionTrigger<VoidSurvivalTrigger.Conditions> {
 
     // Track players in void
     private final Set<UUID> playersInVoid = new HashSet<>();

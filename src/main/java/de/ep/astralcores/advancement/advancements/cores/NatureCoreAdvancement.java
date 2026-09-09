@@ -102,7 +102,7 @@ public class NatureCoreAdvancement {
                 BuiltInRegistries.ITEM
                         .getKey(item)
                         .getPath(),
-                AdvancementUtil.hasItem(lookup, item)
+                AdvancementUtil.hasItemTotal(item, 1)
         );
     }
 }

@@ -1,4 +1,4 @@
-package de.ep.astralcores.advancement.criterion.criterions;
+package de.ep.astralcores.advancement.trigger.triggers;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -10,8 +10,8 @@ import net.minecraft.world.level.Level;
 
 import java.util.Optional;
 
-public class NetherTimeCriterion
-        extends SimpleCriterionTrigger<NetherTimeCriterion.Conditions> {
+public class NetherTimeTrigger
+        extends SimpleCriterionTrigger<NetherTimeTrigger.Conditions> {
 
     @Override
     public Codec<Conditions> codec() {
