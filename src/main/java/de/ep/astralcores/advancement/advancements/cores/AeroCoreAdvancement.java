@@ -34,7 +34,7 @@ public class AeroCoreAdvancement {
                 .display(
                         Items.WIND_CHARGE,
                         Component.literal("Sky Pig"),
-                        Component.literal("Ride a pig above Y=4000."),
+                        Component.literal("Ride a pig above Y=5000."),
                         null,
                         AdvancementType.CHALLENGE,
                         true,
@@ -57,7 +57,7 @@ public class AeroCoreAdvancement {
                                         .located(
                                                 LocationPredicate.Builder.location()
                                                         .setY(
-                                                                MinMaxBounds.Doubles.atLeast(4000.0)
+                                                                MinMaxBounds.Doubles.atLeast(5000.0)
                                                         )
                                         )
                         )
