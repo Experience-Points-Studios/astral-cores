@@ -14,7 +14,7 @@ public final class TriggerManager {
 
     public static void onPlayerDisconnect(ServerPlayer player) {
         TriggerRegistry.VOID_SURVIVAL.removePlayer(player.getUUID());
-        TriggerRegistry.
+        TriggerRegistry.TRAVELED_ON_BLOCK.removePlayer(player.getUUID());
     }
 
     public static void onInventoryChange(ServerPlayer player) {
