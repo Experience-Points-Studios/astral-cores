@@ -36,7 +36,7 @@ public class BerserkerCoreAdvancement {
                 .display(
                         Items.BLAZE_POWDER,
                         Component.literal("Dare Devil"),
-                        Component.literal(""),
+                        Component.literal("Kill 20 Piglins, 100 Zombified Piglins and 10 Piglin Brutes"),
                         null,
                         AdvancementType.CHALLENGE,
                         true,
