@@ -7,14 +7,35 @@ import net.minecraft.advancements.AdvancementType;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 public class NatureCoreAdvancement {
+
+    private static final List<ResourceKey<Biome>> BIOMES = List.of(
+            Biomes.PLAINS,
+            Biomes.FLOWER_FOREST,
+            Biomes.FOREST,
+            Biomes.BIRCH_FOREST,
+            Biomes.DARK_FOREST,
+            Biomes.JUNGLE,
+            Biomes.TAIGA,
+            Biomes.CHERRY_GROVE,
+            Biomes.PALE_GARDEN,
+            Biomes.SWAMP,
+            Biomes.MANGROVE_SWAMP,
+            Biomes.SAVANNA,
+            Biomes.WINDSWEPT_FOREST,
+            Biomes.MUSHROOM_FIELDS,
+            Biomes.MEADOW
+    );
 
     private static final List<Item> FLOWERS = List.of(
             Items.ALLIUM,
@@ -81,6 +102,13 @@ public class NatureCoreAdvancement {
 
         for (Item item : SAPLINGS) {
             addItemCriterion(builder, lookup, item);
+        }
+
+        for (ResourceKey<Biome> biome : BIOMES) {
+            builder.addCriterion(
+                    biome.identifier().getPath(),
+                    AdvancementUtil.isInBiome(lookup, biome)
+            );
         }
 
         builder

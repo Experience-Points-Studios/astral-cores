@@ -1,0 +1,30 @@
+{
+  "criteria": {
+    "compasses": {
+      "conditions": {
+        "lodestone_compass": "minecraft:compass",
+        "lodestone_count": 9,
+        "recovery_compass": "minecraft:recovery_compass",
+        "recovery_count": 3
+      },
+      "trigger": "astralcores:compass"
+    }
+  },
+  "display": {
+    "description": "Have 9 Lodestone Compasses linked to different Lodestones and 3 Recovery Compasses",
+    "frame": "challenge",
+    "icon": {
+      "id": "minecraft:compass"
+    },
+    "title": "Magnetic Field"
+  },
+  "requirements": [
+    [
+      "compasses"
+    ]
+  ],
+  "rewards": {
+    "function": "astralcores:core/magnet_core"
+  },
+  "sends_telemetry_event": true
+}

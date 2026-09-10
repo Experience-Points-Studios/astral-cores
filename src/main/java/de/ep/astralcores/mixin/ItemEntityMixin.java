@@ -4,6 +4,7 @@ import de.ep.astralcores.advancement.trigger.TriggerRegistry;
 import de.ep.astralcores.core.Core;
 import de.ep.astralcores.core.CoreFactory;
 import de.ep.astralcores.core.respawn.CoreRespawnManager;
+import de.ep.astralcores.manager.TriggerManager;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -104,7 +105,7 @@ public abstract class ItemEntityMixin {
 
         if (player instanceof ServerPlayer serverPlayer) {
 
-            TriggerRegistry.HAS_ITEM_COUNT.trigger(serverPlayer);
+            TriggerManager.onInventoryChange(serverPlayer);
         }
     }
 }

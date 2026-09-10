@@ -5,6 +5,7 @@
   "mixins": [
     "BundleItemMixin",
     "ClientboundSetEquipmentPacketMixin",
+    "CompassItemMixin",
     "HopperBlockEntityMixin",
     "InventoryMixin",
     "ItemEntityMixin",
