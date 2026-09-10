@@ -3,6 +3,7 @@ package de.ep.astralcores;
 import de.ep.astralcores.advancement.trigger.TriggerRegistry;
 import de.ep.astralcores.command.CommandRegistry;
 import de.ep.astralcores.core.respawn.CoreRespawnDataManager;
+import de.ep.astralcores.event.EntityCombatEventsListener;
 import de.ep.astralcores.event.PlayerEventsListener;
 import de.ep.astralcores.event.ServerLifecycleEventsListener;
 import de.ep.astralcores.playerdata.PlayerDataManager;
@@ -44,6 +45,8 @@ public class AstralCores implements ModInitializer {
 		MainLoop.register();
 
 		TriggerRegistry.init();
+
+		EntityCombatEventsListener.register();
 	}
 
 	public static void setServer(MinecraftServer minecraftServer) {

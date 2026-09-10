@@ -1,0 +1,54 @@
+{
+  "criteria": {
+    "entity.minecraft.piglin": {
+      "conditions": {
+        "count": {
+          "min": 20
+        },
+        "entity_type": "minecraft:piglin"
+      },
+      "trigger": "astralcores:entity_killed"
+    },
+    "entity.minecraft.piglin_brute": {
+      "conditions": {
+        "count": {
+          "min": 10
+        },
+        "entity_type": "minecraft:piglin_brute"
+      },
+      "trigger": "astralcores:entity_killed"
+    },
+    "entity.minecraft.zombified_piglin": {
+      "conditions": {
+        "count": {
+          "min": 100
+        },
+        "entity_type": "minecraft:zombified_piglin"
+      },
+      "trigger": "astralcores:entity_killed"
+    }
+  },
+  "display": {
+    "description": "",
+    "frame": "challenge",
+    "icon": {
+      "id": "minecraft:blaze_powder"
+    },
+    "title": "Dare Devil"
+  },
+  "requirements": [
+    [
+      "entity.minecraft.piglin"
+    ],
+    [
+      "entity.minecraft.piglin_brute"
+    ],
+    [
+      "entity.minecraft.zombified_piglin"
+    ]
+  ],
+  "rewards": {
+    "function": "astralcores:core/berserker_core"
+  },
+  "sends_telemetry_event": true
+}

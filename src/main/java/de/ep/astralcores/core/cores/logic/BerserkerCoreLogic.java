@@ -131,7 +131,6 @@ public final class BerserkerCoreLogic {
     }
 
     public static void handleBloodlust(
-            ServerPlayer victim,
             DamageSource source
     ) {
         Entity attacker = source.getEntity();
