@@ -16,9 +16,9 @@ import java.util.function.Consumer;
 public class BerserkerCoreAdvancement {
 
     private static final Map<EntityType<?>, Integer> MOBS = Map.of(
-            EntityTypes.PIGLIN, 1,
-            EntityTypes.ZOMBIFIED_PIGLIN, 1,
-            EntityTypes.PIGLIN_BRUTE, 1
+            EntityTypes.PIGLIN, 20,
+            EntityTypes.ZOMBIFIED_PIGLIN, 100,
+            EntityTypes.PIGLIN_BRUTE, 10
     );
 
     public static void generate(

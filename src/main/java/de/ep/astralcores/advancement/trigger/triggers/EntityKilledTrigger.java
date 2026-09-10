@@ -57,6 +57,9 @@ public class EntityKilledTrigger
         }
 
         public boolean requirementsMet(ServerPlayer player) {
+
+            player.awardStat(Stats.ENTITY_KILLED.get(entityType));
+
             int kills = player.getStats()
                     .getValue(Stats.ENTITY_KILLED.get(entityType));
 
