@@ -28,6 +28,22 @@
       },
       "trigger": "astralcores:has_item_count"
     },
+    "birch_forest": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:birch_forest"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
     "birch_sapling": {
       "conditions": {
         "count": 1,
@@ -41,6 +57,22 @@
         "item": "minecraft:blue_orchid"
       },
       "trigger": "astralcores:has_item_count"
+    },
+    "cherry_grove": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:cherry_grove"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
     },
     "cherry_sapling": {
       "conditions": {
@@ -70,12 +102,76 @@
       },
       "trigger": "astralcores:has_item_count"
     },
+    "dark_forest": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:dark_forest"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
     "dark_oak_sapling": {
       "conditions": {
         "count": 1,
         "item": "minecraft:dark_oak_sapling"
       },
       "trigger": "astralcores:has_item_count"
+    },
+    "flower_forest": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:flower_forest"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "forest": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:forest"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "jungle": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:jungle"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
     },
     "jungle_sapling": {
       "conditions": {
@@ -97,6 +193,54 @@
         "item": "minecraft:mangrove_propagule"
       },
       "trigger": "astralcores:has_item_count"
+    },
+    "mangrove_swamp": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:mangrove_swamp"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "meadow": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:meadow"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "mushroom_fields": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:mushroom_fields"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
     },
     "oak_sapling": {
       "conditions": {
@@ -126,6 +270,22 @@
       },
       "trigger": "astralcores:has_item_count"
     },
+    "pale_garden": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:pale_garden"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
     "pale_oak_sapling": {
       "conditions": {
         "count": 1,
@@ -139,6 +299,22 @@
         "item": "minecraft:pink_tulip"
       },
       "trigger": "astralcores:has_item_count"
+    },
+    "plains": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:plains"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
     },
     "poppy": {
       "conditions": {
@@ -161,6 +337,22 @@
       },
       "trigger": "astralcores:has_item_count"
     },
+    "savanna": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:savanna"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
     "spore_blossom": {
       "conditions": {
         "count": 1,
@@ -182,6 +374,38 @@
       },
       "trigger": "astralcores:has_item_count"
     },
+    "swamp": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:swamp"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "taiga": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:taiga"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
     "torchflower": {
       "conditions": {
         "count": 1,
@@ -195,6 +419,22 @@
         "item": "minecraft:white_tulip"
       },
       "trigger": "astralcores:has_item_count"
+    },
+    "windswept_forest": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:windswept_forest"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
     }
   },
   "display": {
@@ -289,6 +529,51 @@
     ],
     [
       "spruce_sapling"
+    ],
+    [
+      "plains"
+    ],
+    [
+      "flower_forest"
+    ],
+    [
+      "forest"
+    ],
+    [
+      "birch_forest"
+    ],
+    [
+      "dark_forest"
+    ],
+    [
+      "jungle"
+    ],
+    [
+      "taiga"
+    ],
+    [
+      "cherry_grove"
+    ],
+    [
+      "pale_garden"
+    ],
+    [
+      "swamp"
+    ],
+    [
+      "mangrove_swamp"
+    ],
+    [
+      "savanna"
+    ],
+    [
+      "windswept_forest"
+    ],
+    [
+      "mushroom_fields"
+    ],
+    [
+      "meadow"
     ]
   ],
   "rewards": {
