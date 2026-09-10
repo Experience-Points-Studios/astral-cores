@@ -1,6 +1,8 @@
 package de.ep.astralcores.mixin;
 
-import de.ep.astralcores.advancement.trigger.TriggerRegistry;
+
+import de.ep.astralcores.manager.TriggerManager;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Final;
@@ -17,9 +19,9 @@ public class InventoryMixin {
 
     @Inject(method = "setChanged", at = @At("TAIL"))
     private void astralcores$onInventoryChanged(CallbackInfo ci) {
-        if (this.player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+        if (this.player instanceof ServerPlayer serverPlayer) {
 
-            TriggerRegistry.HAS_ITEM_COUNT.trigger(serverPlayer);
+            TriggerManager.onInventoryChange(serverPlayer);
         }
     }
 }

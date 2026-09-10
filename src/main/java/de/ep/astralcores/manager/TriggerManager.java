@@ -14,4 +14,9 @@ public final class TriggerManager {
     public static void onPlayerDisconnect(ServerPlayer player) {
         TriggerRegistry.VOID_SURVIVAL.removePlayer(player.getUUID());
     }
+
+    public static void onInventoryChange(ServerPlayer player) {
+        TriggerRegistry.HAS_ITEM_COUNT.trigger(player);
+        TriggerRegistry.COMPASS.trigger(player);
+    }
 }
