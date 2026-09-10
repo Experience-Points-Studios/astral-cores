@@ -7,6 +7,7 @@ import net.minecraft.advancements.triggers.SimpleCriterionTrigger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -19,9 +20,8 @@ import java.util.UUID;
 public class TraveledOnBlockTrigger
         extends SimpleCriterionTrigger<TraveledOnBlockTrigger.Conditions> {
 
-    /**
-     * Stores the last position and accumulated distance for every player.
-     */
+    // Stores the last known position and traveled distance for each player.
+    // The UUID is used as the key so the data can be found again on the next trigger call.
     private final Map<UUID, PlayerData> players = new HashMap<>();
 
     @Override
@@ -29,191 +29,102 @@ public class TraveledOnBlockTrigger
         return Conditions.CODEC;
     }
 
-    /**
-     * Call this once every server tick for every player.
-     */
-    public void tick(ServerPlayer player) {
+    public void trigger(ServerPlayer player) {
         UUID uuid = player.getUUID();
+        Vec3 current = player.position();
 
-        Vec3 currentPosition = player.position();
+        // Get the player's previous position and accumulated distance.
+        PlayerData old = players.get(uuid);
 
-        PlayerData oldData = players.get(uuid);
-
-        /*
-         * First tick for this player.
-         * Just initialize their position.
-         */
-        if (oldData == null) {
-            players.put(uuid, new PlayerData(currentPosition, 0.0));
+        // On the first call there is no previous position.
+        // We only save the current position and start the distance at 0.
+        if (old == null) {
+            players.put(uuid, new PlayerData(current, 0));
             return;
         }
 
-        Vec3 previousPosition = oldData.position();
+        // Only calculate horizontal movement.
+        // Y movement is ignored, so jumping/falling does not add to the traveled distance.
+        double dx = current.x - old.position().x;
+        double dz = current.z - old.position().z;
+        double moved = Math.sqrt(dx * dx + dz * dz);
 
-        /*
-         * Always update the position, even if we don't count
-         * the movement.
-         */
-        double dx = currentPosition.x - previousPosition.x;
-        double dz = currentPosition.z - previousPosition.z;
-
-        double horizontalDistance = Math.sqrt(
-                dx * dx + dz * dz
-        );
-
-        double accumulatedDistance = oldData.distance();
-
-        /*
-         * Don't count spectators.
-         */
-        if (player.isSpectator()) {
-            players.put(
-                    uuid,
-                    new PlayerData(currentPosition, accumulatedDistance)
-            );
-            return;
-        }
-
-        /*
-         * Don't count flying / elytra movement.
-         *
-         * When riding a horse, check the vehicle instead because
-         * the horse is the entity actually touching the ground.
-         */
-        var entity = player.getVehicle() != null
+        // If the player is riding an entity, use the vehicle's position and ground state.
+        // Otherwise, use the player itself.
+        Entity entity = player.getVehicle() != null
                 ? player.getVehicle()
                 : player;
 
-        if (!entity.onGround()) {
-            players.put(
-                    uuid,
-                    new PlayerData(currentPosition, accumulatedDistance)
-            );
+        // Update the stored position before checking whether the movement should count.
+        // This prevents movement during invalid states from being counted later.
+        players.put(uuid, new PlayerData(current, old.distance()));
+
+        // Spectators should never accumulate distance.
+        // Players who are not on the ground also do not count unless they are riding a vehicle.
+        if (player.isSpectator() || (!entity.onGround() && player.getVehicle() == null)) {
             return;
         }
 
-        /*
-         * Don't count if there was no horizontal movement.
-         */
-        if (horizontalDistance <= 0.0) {
-            players.put(
-                    uuid,
-                    new PlayerData(currentPosition, accumulatedDistance)
-            );
+        // Ignore calls where the player has not moved horizontally.
+        if (moved <= 0) {
             return;
         }
 
-        /*
-         * Block directly underneath the entity.
-         */
-        BlockPos blockPos = entity.blockPosition().below();
-        BlockState blockState = player.level().getBlockState(blockPos);
+        // Get the block directly below the player/vehicle.
+        // This is the block the player is considered to be traveling on.
+        BlockPos pos = entity.blockPosition().below();
+        BlockState state = player.level().getBlockState(pos);
 
-        /*
-         * We accumulate distance here.
-         *
-         * The actual block requirement is checked by the
-         * advancement's Conditions below.
-         */
-        accumulatedDistance += horizontalDistance;
+        // Add the newly traveled distance to the player's accumulated distance.
+        double distance = old.distance() + moved;
 
-        players.put(
-                uuid,
-                new PlayerData(currentPosition, accumulatedDistance)
-        );
+        // Save the updated distance so it can be continued on the next trigger call.
+        players.put(uuid, new PlayerData(current, distance));
 
-        /*
-         * Test all advancement criteria registered for this trigger.
-         */
-        double finalDistance = accumulatedDistance;
-
-        this.trigger(player, conditions ->
-                conditions.requirementsMet(
-                        player,
-                        blockState,
-                        finalDistance
-                )
+        // Check all advancement conditions registered for this trigger.
+        // The advancement is completed when the block matches and enough distance was traveled.
+        trigger(player, conditions ->
+                conditions.requirementsMet(state, distance)
         );
     }
 
-    /**
-     * Remove a player from the tracking map.
-     */
+    // Removes all stored movement data for a player.
+    // This is useful when the player leaves the server so their data does not stay in memory.
     public void removePlayer(UUID uuid) {
         players.remove(uuid);
     }
 
-    /**
-     * Reset accumulated distance for a player.
-     */
-    public void resetPlayer(UUID uuid) {
-        PlayerData data = players.get(uuid);
-
-        if (data != null) {
-            players.put(
-                    uuid,
-                    new PlayerData(data.position(), 0.0)
-            );
-        }
+    // Stores the player's last position and the total distance traveled.
+    private record PlayerData(Vec3 position, double distance) {
     }
 
-    /**
-     * Get the currently accumulated distance.
-     */
-    public double getDistance(UUID uuid) {
-        PlayerData data = players.get(uuid);
-
-        return data == null
-                ? 0.0
-                : data.distance();
-    }
-
-    /**
-     * Per-player tracking data.
-     */
-    private record PlayerData(
-            Vec3 position,
-            double distance
-    ) {
-    }
-
-    /**
-     * Advancement criterion conditions.
-     */
     public record Conditions(
             Optional<ContextAwarePredicate> playerPredicate,
             Block block,
             double distance
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        /**
-         * Codec for:
-         *
-         * {
-         *   "player": ...,
-         *   "block": "minecraft:ice",
-         *   "distance": 100.0
-         * }
-         */
+        // Defines how the advancement condition is read from JSON.
+        // For example, "block" identifies the block and "distance" defines
+        // how many blocks the player needs to travel.
         public static final Codec<Conditions> CODEC =
                 RecordCodecBuilder.create(instance -> instance.group(
-
+                        // The player predicate is optional and can contain additional
+                        // conditions about the player who activates the trigger.
                         ContextAwarePredicate.CODEC
                                 .optionalFieldOf("player")
                                 .forGetter(Conditions::player),
 
+                        // Converts the block name from JSON into an actual Minecraft Block.
                         BuiltInRegistries.BLOCK
                                 .byNameCodec()
                                 .fieldOf("block")
-                                .forGetter(
-                                        conditions -> conditions.block()
-                                ),
+                                .forGetter(Conditions::block),
 
+                        // Reads the required travel distance from JSON.
                         Codec.DOUBLE
                                 .fieldOf("distance")
-                                .forGetter(
-                                        Conditions::distance
-                                )
+                                .forGetter(Conditions::distance)
 
                 ).apply(instance, Conditions::new));
 
@@ -222,53 +133,19 @@ public class TraveledOnBlockTrigger
             return playerPredicate;
         }
 
-        /**
-         * Check whether this criterion has been satisfied.
-         */
+        // Checks whether the block underneath the player matches the required block
+        // and whether the player has traveled at least the required distance.
         public boolean requirementsMet(
-                ServerPlayer player,
-                BlockState blockState,
+                BlockState state,
                 double traveledDistance
         ) {
-
-            /*
-             * The player must have traveled at least
-             * the configured distance.
-             */
-            if (traveledDistance < distance) {
-                return false;
-            }
-
-            /*
-             * The block underneath must match.
-             */
-            return blockState.is(block);
+            return state.is(block) && traveledDistance >= distance;
         }
 
-        /**
-         * Convenient constructor for Java advancement generation.
-         */
-        public static Conditions of(
-                Block block,
-                double distance
-        ) {
+        // Convenience method for creating conditions without a player predicate.
+        public static Conditions of(Block block, double distance) {
             return new Conditions(
                     Optional.empty(),
-                    block,
-                    distance
-            );
-        }
-
-        /**
-         * Constructor with a player predicate.
-         */
-        public static Conditions of(
-                Optional<ContextAwarePredicate> playerPredicate,
-                Block block,
-                double distance
-        ) {
-            return new Conditions(
-                    playerPredicate,
                     block,
                     distance
             );
