@@ -44,7 +44,7 @@ public class FrostCoreAdvancement {
                 .display(
                         Blocks.BLUE_ICE,
                         Component.literal("Pretty Cold"),
-                        Component.literal(""),
+                        Component.literal("Travel 10000 Blocks on Ice and got to the biomes Ice Spikes, Snowy Slopes & Snowy Taiga"),
                         null,
                         AdvancementType.CHALLENGE,
                         true,

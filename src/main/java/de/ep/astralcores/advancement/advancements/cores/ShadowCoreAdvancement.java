@@ -25,7 +25,7 @@ public class ShadowCoreAdvancement {
         Advancement.Builder.advancement()
                 .display(
                         Items.ENDER_EYE,
-                        Component.literal("Where did i go"),
+                        Component.literal("Where did I go"),
                         Component.literal(
                                 "Disappear into the void and survive it."
                         ),

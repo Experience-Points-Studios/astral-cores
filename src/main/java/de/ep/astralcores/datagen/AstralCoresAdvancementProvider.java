@@ -35,6 +35,5 @@ public class AstralCoresAdvancementProvider extends FabricAdvancementProvider {
         GravityCoreAdvancement.generate(lookup, consumer);
         MagnetCoreAdvancement.generate(consumer);
         FrostCoreAdvancement.generate(lookup, consumer);
-        IllusionCoreAdvancement.generate(lookup, consumer);
     }
 }

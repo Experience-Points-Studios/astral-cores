@@ -32,7 +32,7 @@ public class ChronoCoreAdvancement {
                 .display(
                         Items.WIND_CHARGE,
                         Component.literal("Time Traveler"),
-                        Component.literal("Ride every type of horse.."),
+                        Component.literal("Ride every type of horse"),
                         null,
                         AdvancementType.CHALLENGE,
                         true,
