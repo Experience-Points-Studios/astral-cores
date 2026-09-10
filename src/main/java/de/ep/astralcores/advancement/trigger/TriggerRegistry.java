@@ -1,11 +1,7 @@
 package de.ep.astralcores.advancement.trigger;
 
 import de.ep.astralcores.AstralCores;
-import de.ep.astralcores.advancement.trigger.triggers.EntityKilledTrigger;
-import de.ep.astralcores.advancement.trigger.triggers.CompassTrigger;
-import de.ep.astralcores.advancement.trigger.triggers.HasItemCountTrigger;
-import de.ep.astralcores.advancement.trigger.triggers.NetherTimeTrigger;
-import de.ep.astralcores.advancement.trigger.triggers.VoidSurvivalTrigger;
+import de.ep.astralcores.advancement.trigger.triggers.*;
 import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -25,10 +21,13 @@ public class TriggerRegistry {
             register("has_item_count", new HasItemCountTrigger());
 
     public static final EntityKilledTrigger ENTITY_KILLED =
-            register("entity_killed", new EntityKilledTrigger())
-;
+            register("entity_killed", new EntityKilledTrigger());
+
     public static final CompassTrigger COMPASS =
             register("compass", new CompassTrigger());
+
+    public static final TraveledOnBlockTrigger TRAVELED_ON_BLOCK =
+            register("traveled_on_block", new TraveledOnBlockTrigger());
 
 
     private static <T extends CriterionTrigger<?>> T register(

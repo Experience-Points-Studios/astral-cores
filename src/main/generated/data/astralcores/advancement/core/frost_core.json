@@ -1,0 +1,85 @@
+{
+  "criteria": {
+    "ice_spikes": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:ice_spikes"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "snowy_slopes": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:snowy_slopes"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "snowy_taiga": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:snowy_taiga"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
+    "travel_on_ice": {
+      "conditions": {
+        "block": "minecraft:ice",
+        "distance": 10000.0
+      },
+      "trigger": "astralcores:traveled_on_block"
+    }
+  },
+  "display": {
+    "description": "",
+    "frame": "challenge",
+    "icon": {
+      "id": "minecraft:blue_ice"
+    },
+    "title": "Pretty Cold"
+  },
+  "requirements": [
+    [
+      "ice_spikes"
+    ],
+    [
+      "snowy_slopes"
+    ],
+    [
+      "snowy_taiga"
+    ],
+    [
+      "travel_on_ice"
+    ]
+  ],
+  "rewards": {
+    "function": "astralcores:core/frost_core"
+  },
+  "sends_telemetry_event": true
+}

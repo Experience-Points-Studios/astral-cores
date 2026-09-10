@@ -29,7 +29,7 @@
     }
   },
   "display": {
-    "description": "",
+    "description": "Kill 20 Piglins, 100 Zombified Piglins and 10 Piglin Brutes",
     "frame": "challenge",
     "icon": {
       "id": "minecraft:blaze_powder"
@@ -38,13 +38,13 @@
   },
   "requirements": [
     [
-      "entity.minecraft.piglin"
-    ],
-    [
       "entity.minecraft.piglin_brute"
     ],
     [
       "entity.minecraft.zombified_piglin"
+    ],
+    [
+      "entity.minecraft.piglin"
     ]
   ],
   "rewards": {

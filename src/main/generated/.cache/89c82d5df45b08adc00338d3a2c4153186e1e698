@@ -1,7 +1,8 @@
 // 26.2	-999999999-01-01T00:00:00	Astral Cores/Advancements
 6b11eca278880ce57d89c073514c44e0d4178ba3 data/astralcores/advancement/core/aero_core.json
-c3d98395c89b473f0e66088dd354cd1cf90f7200 data/astralcores/advancement/core/berserker_core.json
+dc55549a4f0caec2ae78dac9a81c893d6ebe0201 data/astralcores/advancement/core/berserker_core.json
 f94aada281d9e5a8ba6b285eab262eca21bde9f2 data/astralcores/advancement/core/chrono_core.json
+b914bd0ed45caf78c9fefd4e8e702472b8424d26 data/astralcores/advancement/core/frost_core.json
 77a3c5deaf4bdb5b5a7ff8cc07747736975fb73e data/astralcores/advancement/core/gale_core.json
 966d175516fae7dd8b09d759f9eb3bb038277614 data/astralcores/advancement/core/gravity_core.json
 9d19c0c44ce86077533171711c70cb535d483f6b data/astralcores/advancement/core/leviathan_core.json
