@@ -44,9 +44,13 @@ public class BerserkerCoreAdvancement {
                         false
                 );
 
-        MOBS.forEach(
-                AdvancementUtil::entityKilled
-        );
+        MOBS.forEach((entityType, count) -> {
+            builder.addCriterion(
+                    entityType.toString(),
+                    AdvancementUtil.entityKilled(entityType, count)
+            );
+        });
+
         builder
 
                 .rewards(
