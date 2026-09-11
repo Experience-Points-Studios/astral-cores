@@ -12,7 +12,7 @@
 		"homepage": "https://modrinth.com/project/astral-cores",
 		"sources": "https://github.com/Experience-Points-Studios/astral-cores"
 	},
-	"license": "MIT",
+	"license": "GPL-3+",
 	"icon": "assets/astralcores/icon.png",
 	"environment": "*",
 	"entrypoints": {
