@@ -51,7 +51,7 @@ public class LeviathanCore extends Core {
                                 .withStyle(ChatFormatting.GRAY)
                 ),
                 10009,
-                0,
+                30,
                 0,
                 86400L,
                 "Whirlpool",

@@ -51,7 +51,7 @@ public class NatureCore extends Core {
                                 .withStyle(ChatFormatting.GRAY)
                 ),
                 10012,
-                0,
+                45,
                 0,
                 86400L,
                 "Root Trap",
