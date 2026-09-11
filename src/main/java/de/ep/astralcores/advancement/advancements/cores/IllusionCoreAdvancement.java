@@ -40,14 +40,14 @@ public class IllusionCoreAdvancement {
     );
 
     public static void generate(Consumer<AdvancementHolder> consumer) {
-        createAdvancement(consumer);
+        masterOfBrewing(consumer);
     }
 
-    private static void createAdvancement(Consumer<AdvancementHolder> consumer) {
+    private static void masterOfBrewing(Consumer<AdvancementHolder> consumer) {
         Advancement.Builder builder = Advancement.Builder.advancement()
                 .display(
                         Items.AMETHYST_SHARD,
-                        Component.literal("Effect ive"),
+                        Component.literal("Master of Brewing"),
                         Component.literal("Have all brewable potion effects at the same time"),
                         null,
                         AdvancementType.CHALLENGE,
