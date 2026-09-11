@@ -38,13 +38,13 @@
   },
   "requirements": [
     [
+      "entity.minecraft.piglin_brute"
+    ],
+    [
       "entity.minecraft.zombified_piglin"
     ],
     [
       "entity.minecraft.piglin"
-    ],
-    [
-      "entity.minecraft.piglin_brute"
     ]
   ],
   "rewards": {

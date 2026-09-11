@@ -51,7 +51,7 @@ public class ShadowCore extends Core {
                                 .withStyle(ChatFormatting.GRAY)
                 ),
                 10007,
-                0,
+                30,
                 0,
                 86400L,
                 "Smoke Veil",
