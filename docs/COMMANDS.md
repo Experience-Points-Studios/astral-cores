@@ -61,8 +61,10 @@ The **/actionbar** command lets you switch between different actionbar displays:
 /astralcores
 ├── debug
 │   └── resetCooldowns
-└── place
-    └── altar <pos>
+├── place
+│   └── altar <pos>
+└── remove
+    └── altar
 ```
 
 - **debug resetCooldowns**
@@ -70,12 +72,16 @@ The **/actionbar** command lets you switch between different actionbar displays:
 - **place altar <pos>**
   - Places an altar at the specified position.
   - An operator can put a core inside the altar if it gets destroyed, e.g. by falling into the void.
+- **remove altar**
+  - Removes the currently registered altar.
+  - Use this if the altar was placed at the wrong location, then break the altar before placing a new one.
 
 ### Core
 
 ```text
 /core
 ├── give <player>
+├── giveAll <player>
 ├── set <player>
 ├── clear <player>
 └── clearInv <player>
@@ -83,6 +89,8 @@ The **/actionbar** command lets you switch between different actionbar displays:
 
 - **give**
   - Gives a core to a player.
+- **giveAll**
+  - Gives all cores to a player.
 - **set**
   - Sets a player's core in their actionbar.
 - **clear**
