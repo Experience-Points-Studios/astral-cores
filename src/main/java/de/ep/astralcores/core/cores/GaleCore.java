@@ -51,7 +51,7 @@ public class GaleCore extends Core {
                                 .withStyle(ChatFormatting.GRAY)
                 ),
                 10005,
-                45,
+                25,
                 0,
                 86400L,
                 "Sonic Dash",

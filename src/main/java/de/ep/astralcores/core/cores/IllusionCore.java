@@ -51,7 +51,7 @@ public class IllusionCore extends Core {
                                 .withStyle(ChatFormatting.GRAY)
                 ),
                 10011,
-                90,
+                75,
                 0,
                 86400L,
                 "Mirror Swap",
