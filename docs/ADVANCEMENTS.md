@@ -31,8 +31,9 @@ Have Speed 2, Dolphins Grace and Netherite Boots with Soul Speed 3 while walking
 Get 2 stacks of Anvils
 
 
-## Illusin Core
-### Magician
+## Illusion Core
+### Master of Brewing
+Have all brewable potion effects at the same time
 
 
 
