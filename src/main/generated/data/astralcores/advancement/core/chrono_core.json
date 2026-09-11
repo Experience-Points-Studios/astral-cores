@@ -50,7 +50,7 @@
     }
   },
   "display": {
-    "description": "Ride every type of horse..",
+    "description": "Ride every type of horse",
     "frame": "challenge",
     "icon": {
       "id": "minecraft:wind_charge"

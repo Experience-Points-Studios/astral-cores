@@ -57,7 +57,7 @@
     }
   },
   "display": {
-    "description": "",
+    "description": "Travel 10000 Blocks on Ice and got to the biomes Ice Spikes, Snowy Slopes & Snowy Taiga",
     "frame": "challenge",
     "icon": {
       "id": "minecraft:blue_ice"
