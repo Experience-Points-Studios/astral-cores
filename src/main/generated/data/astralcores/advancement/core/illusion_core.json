@@ -1,0 +1,46 @@
+{
+  "criteria": {
+    "effects": {
+      "conditions": {
+        "effects": {
+          "minecraft:fire_resistance": {},
+          "minecraft:infested": {},
+          "minecraft:instant_damage": {},
+          "minecraft:instant_health": {},
+          "minecraft:invisibility": {},
+          "minecraft:jump_boost": {},
+          "minecraft:night_vision": {},
+          "minecraft:oozing": {},
+          "minecraft:poison": {},
+          "minecraft:regeneration": {},
+          "minecraft:slow_falling": {},
+          "minecraft:slowness": {},
+          "minecraft:speed": {},
+          "minecraft:strength": {},
+          "minecraft:water_breathing": {},
+          "minecraft:weakness": {},
+          "minecraft:weaving": {},
+          "minecraft:wind_charged": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "display": {
+    "description": "Have all brewable potion effects at the same time",
+    "frame": "challenge",
+    "icon": {
+      "id": "minecraft:amethyst_shard"
+    },
+    "title": "Effect ive"
+  },
+  "requirements": [
+    [
+      "effects"
+    ]
+  ],
+  "rewards": {
+    "function": "astralcores:core/illusion_core"
+  },
+  "sends_telemetry_event": true
+}
