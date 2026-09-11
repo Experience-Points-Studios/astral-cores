@@ -2,7 +2,6 @@ package de.ep.astralcores.core;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.component.CustomData;
@@ -12,7 +11,6 @@ import net.minecraft.world.item.component.ItemLore;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class CoreFactory {
 

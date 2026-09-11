@@ -4,7 +4,6 @@ import de.ep.astralcores.AstralCores;
 import de.ep.astralcores.actionbar.ActionBarManager;
 import de.ep.astralcores.core.CoreFactory;
 import de.ep.astralcores.core.CoreRegistry;
-import de.ep.astralcores.core.CoreType;
 import de.ep.astralcores.playerdata.PlayerData;
 import de.ep.astralcores.core.Core;
 import net.minecraft.ChatFormatting;
