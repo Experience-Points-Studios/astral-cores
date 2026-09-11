@@ -73,6 +73,38 @@ public class CoreCommandLogic {
         return 1;
     }
 
+
+    public static int giveAll(
+            CommandContext<CommandSourceStack> context
+    ) throws CommandSyntaxException {
+
+        CommandSourceStack source = context.getSource();
+
+        ServerPlayer target =
+                EntityArgument.getPlayer(
+                        context,
+                        "target"
+                );
+
+        for (Core core : CoreRegistry.getAll().values()) {
+            ItemStack itemStack = CoreFactory.createStack(core);
+
+            if (!target.getInventory().add(itemStack)) {
+                target.drop(itemStack, false);
+            }
+        }
+
+        source.sendSuccess(
+                () -> Component.literal("Gave all Cores to ")
+                        .append(target.getDisplayName())
+                        .withStyle(ChatFormatting.GREEN),
+                true
+        );
+
+        return 1;
+    }
+
+
     public static int set(
             CommandContext<CommandSourceStack> context
     ) throws CommandSyntaxException {

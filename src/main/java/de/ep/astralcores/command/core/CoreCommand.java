@@ -52,6 +52,19 @@ public class CoreCommand {
                                         )
                         )
 
+                        .then(
+                                Commands.literal("giveAll")
+                                        .then(
+                                                Commands.argument(
+                                                        "target",
+                                                        EntityArgument.player()
+                                                        )
+                                                        .executes(
+                                                                CoreCommandLogic::giveAll
+                                                        )
+                                        )
+                        )
+
                         // /core set <target> <coreId>
                         .then(
                                 Commands.literal("set")
