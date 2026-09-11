@@ -1,12 +1,17 @@
 # Astral Cores
 
 ## For Players & Server owners 
-### [Cores](docs/CORES.md)
+### [Cores](docs/season-1/CORES.md)
 
-### [Commands](docs/COMMANDS.md)
+### [Commands](docs/season-1/COMMANDS.md)
 
-### [Advancements](docs/ADVANCEMENTS.md)
+### [Advancements](docs/season-1/ADVANCEMENTS.md)
+
+### [Core Respawn System](docs/RESPAWN_SYSTEM.md)
+
+### [Setup](docs/SETUP.md)
 
 ## For Devs
-### [Project Tree](docs/PROJECT_TREE.md)
+### [Project Tree](docs/season-1/PROJECT_TREE.md)
+
 ### [Contributing](CONTRIBUTING.md)
