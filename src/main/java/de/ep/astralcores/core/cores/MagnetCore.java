@@ -51,7 +51,7 @@ public class MagnetCore extends Core {
                                 .withStyle(ChatFormatting.GRAY)
                 ),
                 10010,
-                0,
+                20,
                 0,
                 86400L,
                 "Magnetic Pull",
