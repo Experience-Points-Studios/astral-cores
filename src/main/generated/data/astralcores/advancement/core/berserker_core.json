@@ -41,10 +41,10 @@
       "entity.minecraft.zombified_piglin"
     ],
     [
-      "entity.minecraft.piglin"
+      "entity.minecraft.piglin_brute"
     ],
     [
-      "entity.minecraft.piglin_brute"
+      "entity.minecraft.piglin"
     ]
   ],
   "rewards": {
