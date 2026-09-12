@@ -54,7 +54,8 @@ public class NatureCoreAdvancement {
             Items.RED_TULIP,
             Items.ORANGE_TULIP,
             Items.PINK_TULIP,
-            Items.WHITE_TULIP
+            Items.WHITE_TULIP,
+            Items.PEONY
     );
 
     private static final List<Item> SAPLINGS = List.of(
