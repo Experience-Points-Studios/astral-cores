@@ -293,6 +293,13 @@
       },
       "trigger": "astralcores:has_item_count"
     },
+    "peony": {
+      "conditions": {
+        "count": 1,
+        "item": "minecraft:peony"
+      },
+      "trigger": "astralcores:has_item_count"
+    },
     "pink_tulip": {
       "conditions": {
         "count": 1,
@@ -420,21 +427,12 @@
       },
       "trigger": "astralcores:has_item_count"
     },
-    "windswept_forest": {
+    "wildflowers": {
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:location": {
-                "biomes": "minecraft:windswept_forest"
-              }
-            }
-          }
-        ]
+        "count": 1,
+        "item": "minecraft:wildflowers"
       },
-      "trigger": "minecraft:location"
+      "trigger": "astralcores:has_item_count"
     }
   },
   "display": {
@@ -501,6 +499,12 @@
       "white_tulip"
     ],
     [
+      "peony"
+    ],
+    [
+      "wildflowers"
+    ],
+    [
       "acacia_sapling"
     ],
     [
@@ -565,9 +569,6 @@
     ],
     [
       "savanna"
-    ],
-    [
-      "windswept_forest"
     ],
     [
       "mushroom_fields"
