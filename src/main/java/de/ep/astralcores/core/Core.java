@@ -1,6 +1,5 @@
 package de.ep.astralcores.core;
 
-import de.ep.astralcores.core.CoreType;
 import de.ep.astralcores.core.data.CoreActivationResult;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

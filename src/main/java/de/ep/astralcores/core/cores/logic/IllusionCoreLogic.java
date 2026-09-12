@@ -180,7 +180,7 @@ public final class IllusionCoreLogic {
      * Handles the passive Mirror Image effect.
      *
      * @return true if normal damage processing should continue,
-     *         false if the attack should be cancelled.
+     *         false if the attack should be canceled.
      */
     public static boolean handleMirrorImage(
             ServerPlayer player,

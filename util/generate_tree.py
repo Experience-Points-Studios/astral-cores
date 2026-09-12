@@ -56,7 +56,7 @@ if __name__ == "__main__":
     current_directory = os.getcwd()
     tree_text = generate_tree(current_directory)
 
-    output_dir = os.path.join(current_directory, "docs")
+    output_dir = os.path.join(current_directory, "docs/season-1")
     os.makedirs(output_dir, exist_ok=True)
 
     output_file = os.path.join(output_dir, "PROJECT_TREE.md")

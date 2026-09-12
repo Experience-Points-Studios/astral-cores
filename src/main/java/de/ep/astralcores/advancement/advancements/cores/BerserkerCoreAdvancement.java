@@ -9,7 +9,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Items;
 
-import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 

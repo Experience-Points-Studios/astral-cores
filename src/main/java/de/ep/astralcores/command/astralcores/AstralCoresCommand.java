@@ -1,7 +1,6 @@
 package de.ep.astralcores.command.astralcores;
 
 import com.mojang.brigadier.CommandDispatcher;
-import de.ep.astralcores.command.astralcores.AstralCoresCommandLogic;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;

@@ -1,6 +1,5 @@
 package de.ep.astralcores.mixin;
 
-
 import de.ep.astralcores.manager.TriggerManager;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;

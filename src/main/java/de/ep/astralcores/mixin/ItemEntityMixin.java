@@ -1,6 +1,5 @@
 package de.ep.astralcores.mixin;
 
-import de.ep.astralcores.advancement.trigger.TriggerRegistry;
 import de.ep.astralcores.core.Core;
 import de.ep.astralcores.core.CoreFactory;
 import de.ep.astralcores.core.respawn.CoreRespawnManager;

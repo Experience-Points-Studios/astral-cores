@@ -8,17 +8,26 @@ src/main/java/de/ep/astralcores/
 │   ├── advancements
 │   │   └── cores
 │   │       ├── AeroCoreAdvancement.java
+│   │       ├── BerserkerCoreAdvancement.java
 │   │       ├── ChronoCoreAdvancement.java
+│   │       ├── FrostCoreAdvancement.java
 │   │       ├── GaleCoreAdvancement.java
+│   │       ├── GravityCoreAdvancement.java
+│   │       ├── IllusionCoreAdvancement.java
 │   │       ├── LeviathanCoreAdvancement.java
+│   │       ├── MagnetCoreAdvancement.java
 │   │       ├── NatureCoreAdvancement.java
 │   │       ├── PhoenixCoreAdvancement.java
 │   │       └── ShadowCoreAdvancement.java
-│   └── criterion
-│       ├── criterions
-│       │   ├── NetherTimeCriterion.java
-│       │   └── VoidSurvivalCriterion.java
-│       └── CriterionRegistry.java
+│   └── trigger
+│       ├── triggers
+│       │   ├── CompassTrigger.java
+│       │   ├── EntityKilledTrigger.java
+│       │   ├── HasItemCountTrigger.java
+│       │   ├── NetherTimeTrigger.java
+│       │   ├── TraveledOnBlockTrigger.java
+│       │   └── VoidSurvivalTrigger.java
+│       └── TriggerRegistry.java
 ├── command
 │   ├── actionbar
 │   │   ├── ActionBarCommand.java
@@ -91,6 +100,7 @@ src/main/java/de/ep/astralcores/
 │   ├── logic
 │   │   ├── CoreDeathLogic.java
 │   │   └── CoreInteractLogic.java
+│   ├── EntityCombatEventsListener.java
 │   ├── PlayerEventsListener.java
 │   └── ServerLifecycleEventsListener.java
 ├── manager
@@ -98,12 +108,14 @@ src/main/java/de/ep/astralcores/
 │   ├── CoreActivateManager.java
 │   ├── CoreCooldownManager.java
 │   ├── CoreTickManager.java
-│   ├── CriterionTickManager.java
-│   └── NetherTimeManager.java
+│   ├── NetherTimeManager.java
+│   └── TriggerManager.java
 ├── mixin
 │   ├── BundleItemMixin.java
 │   ├── ClientboundSetEquipmentPacketMixin.java
+│   ├── CompassItemMixin.java
 │   ├── HopperBlockEntityMixin.java
+│   ├── InventoryMixin.java
 │   ├── ItemEntityMixin.java
 │   ├── LivingEntityMixin.java
 │   ├── MannequinAccessor.java

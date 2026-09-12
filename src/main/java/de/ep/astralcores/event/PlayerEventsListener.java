@@ -12,7 +12,6 @@ import de.ep.astralcores.event.logic.CoreDeathLogic;
 import de.ep.astralcores.event.logic.CoreInteractLogic;
 import de.ep.astralcores.manager.TriggerManager;
 import de.ep.astralcores.playerdata.PlayerData;
-import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
@@ -20,7 +19,6 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.ItemStack;
 
 public class PlayerEventsListener {

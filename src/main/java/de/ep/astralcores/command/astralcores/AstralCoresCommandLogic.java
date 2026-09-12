@@ -1,24 +1,18 @@
 package de.ep.astralcores.command.astralcores;
 
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.ep.astralcores.AstralCores;
-import de.ep.astralcores.core.Core;
-import de.ep.astralcores.core.CoreFactory;
-import de.ep.astralcores.core.CoreRegistry;
 import de.ep.astralcores.core.respawn.data.AltarData;
 import de.ep.astralcores.manager.AltarManager;
 import de.ep.astralcores.manager.CoreCooldownManager;
 import de.ep.astralcores.playerdata.PlayerData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ItemStack;
 
 public class AstralCoresCommandLogic {
 
