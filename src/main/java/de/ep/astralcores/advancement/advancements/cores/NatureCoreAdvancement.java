@@ -32,7 +32,6 @@ public class NatureCoreAdvancement {
             Biomes.SWAMP,
             Biomes.MANGROVE_SWAMP,
             Biomes.SAVANNA,
-            Biomes.WINDSWEPT_FOREST,
             Biomes.MUSHROOM_FIELDS,
             Biomes.MEADOW
     );
