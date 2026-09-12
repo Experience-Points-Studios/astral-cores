@@ -1,5 +1,6 @@
 package de.ep.astralcores.mixin;
 
+import de.ep.astralcores.AstralCores;
 import de.ep.astralcores.manager.CoreActivateManager;
 import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,14 +27,15 @@ public class ServerGamePacketListenerImpMixin {
         if (packet.getAction() == ServerboundPlayerActionPacket.Action.SWAP_ITEM_WITH_OFFHAND
                 && this.player.isShiftKeyDown()) {
 
-            var result = CoreActivateManager.attemptActivation(player);
-
-            if (!result.isSuccess() && result.errorMessage() != null) {
-                player.sendSystemMessage(result.errorMessage());
-            }
-
-            // Blocks the normal item switch
             ci.cancel();
+
+            AstralCores.getServer().execute(() -> {
+                var result = CoreActivateManager.attemptActivation(player);
+
+                if (!result.isSuccess() && result.errorMessage() != null) {
+                    player.sendSystemMessage(result.errorMessage());
+                }
+            });
         }
     }
 }
