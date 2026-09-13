@@ -84,8 +84,10 @@ public class ChronoCoreLogic {
 
     public static CoreActivationResult activate(ServerPlayer player) {
 
-        // Check if the Chrono Core is active.
-        if (!(AstralCores.PLAYER_DATA.get(player).getEquippedCore() == CoreType.CHRONO_CORE)) {
+        PlayerData data = AstralCores.PLAYER_DATA.get(player);
+
+        // No player data or wrong core.
+        if (data == null || data.getEquippedCore() != CoreType.CHRONO_CORE) {
             return CoreActivationResult.FAILED;
         }
 

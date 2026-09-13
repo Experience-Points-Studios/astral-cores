@@ -19,6 +19,7 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.item.ItemStack;
 
 public class PlayerEventsListener {
@@ -105,13 +106,20 @@ public class PlayerEventsListener {
             if (!(entity instanceof ServerPlayer player)) {
                 return true;
             }
-            if (!AeroCoreLogic.handleFallShockwave(player, source)) {
-                return false;
+
+            if (!source.is(DamageTypes.FALL)) {
+                if (!AeroCoreLogic.handleFallShockwave(player, source)) {
+                    return false;
+                }
+                return true;
             }
 
-            if (!IllusionCoreLogic.handleMirrorImage(player, source)) {
-                return false;
+            if (source.is(DamageTypes.PLAYER_ATTACK)) {
+                if (!IllusionCoreLogic.handleMirrorImage(player, source)) {
+                    return false;
+                }
             }
+
             return true;
         });
 

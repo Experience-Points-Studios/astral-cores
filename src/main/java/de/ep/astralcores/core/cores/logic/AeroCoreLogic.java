@@ -43,8 +43,15 @@ public class AeroCoreLogic {
             ServerPlayer player,
             DamageSource source
     ) {
+        PlayerData data = AstralCores.PLAYER_DATA.get(player);
+
+        // No PlayerData -> nothing to handle.
+        if (data == null) {
+            return true;
+        }
+
         // Ignore the event if the player does not have Aero Core.
-        if (!(AstralCores.PLAYER_DATA.get(player).getEquippedCore() == CoreType.AERO_CORE)) {
+        if (data.getEquippedCore() != CoreType.AERO_CORE) {
             return true;
         }
 
@@ -75,9 +82,6 @@ public class AeroCoreLogic {
                     );
 
             if (player.level() instanceof ServerLevel serverLevel) {
-
-                PlayerData data =
-                        AstralCores.PLAYER_DATA.get(player);
 
                 for (LivingEntity target : targets) {
 

@@ -4,6 +4,7 @@ import de.ep.astralcores.AstralCores;
 import de.ep.astralcores.core.CoreType;
 import de.ep.astralcores.core.data.CoreActivationResult;
 import de.ep.astralcores.mixin.MannequinAccessor;
+import de.ep.astralcores.playerdata.PlayerData;
 import de.ep.astralcores.util.Effects;
 import de.ep.astralcores.util.TickTimer;
 import net.minecraft.ChatFormatting;
@@ -186,12 +187,13 @@ public final class IllusionCoreLogic {
             ServerPlayer player,
             DamageSource source
     ) {
-        if (!(AstralCores.PLAYER_DATA.get(player).getEquippedCore() == CoreType.ILLUSION_CORE)) {
+        PlayerData data = AstralCores.PLAYER_DATA.get(player);
+
+        if (data == null || data.getEquippedCore() != CoreType.ILLUSION_CORE) {
             return true;
         }
 
-        // Mirror Image only reacts to direct player attacks.
-        if (!source.is(DamageTypes.PLAYER_ATTACK)) {
+        if (!(AstralCores.PLAYER_DATA.get(player).getEquippedCore() == CoreType.ILLUSION_CORE)) {
             return true;
         }
 
