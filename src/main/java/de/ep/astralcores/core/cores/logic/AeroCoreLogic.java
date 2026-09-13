@@ -55,10 +55,6 @@ public class AeroCoreLogic {
             return true;
         }
 
-        // Only react to fall damage.
-        if (!source.is(DamageTypes.FALL)) {
-            return true;
-        }
 
         float fallDistance = (float) player.fallDistance;
         float rawDamage = fallDistance - 3.0F;

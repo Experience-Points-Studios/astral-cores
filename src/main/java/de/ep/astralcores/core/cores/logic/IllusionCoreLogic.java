@@ -193,10 +193,6 @@ public final class IllusionCoreLogic {
             return true;
         }
 
-        if (!(AstralCores.PLAYER_DATA.get(player).getEquippedCore() == CoreType.ILLUSION_CORE)) {
-            return true;
-        }
-
         // 20% chance to trigger.
         if (player.getRandom().nextDouble() >= TRIGGER_CHANCE) {
             return true;
