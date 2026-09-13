@@ -51,7 +51,7 @@ public final class FrostCore extends Core {
                                 .withStyle(ChatFormatting.GRAY)
                 ),
                 10008,
-                30,
+                25,
                 0,
                 86400L,
                 "Frost Lock",

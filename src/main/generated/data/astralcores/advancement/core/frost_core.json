@@ -16,6 +16,22 @@
       },
       "trigger": "minecraft:location"
     },
+    "snowy_plains": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "minecraft:location": {
+                "biomes": "minecraft:snowy_plains"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    },
     "snowy_slopes": {
       "conditions": {
         "player": [
@@ -57,7 +73,7 @@
     }
   },
   "display": {
-    "description": "Travel 10000 Blocks on Ice and got to the biomes Ice Spikes, Snowy Slopes & Snowy Taiga",
+    "description": "Travel 10000 Blocks on Ice and got to the biomes Ice Spikes, Snowy Slopes, Snowy Taiga and Snowy Plains",
     "frame": "challenge",
     "icon": {
       "id": "minecraft:blue_ice"
@@ -73,6 +89,9 @@
     ],
     [
       "snowy_taiga"
+    ],
+    [
+      "snowy_plains"
     ],
     [
       "travel_on_ice"

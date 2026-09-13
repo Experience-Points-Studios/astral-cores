@@ -21,7 +21,8 @@ public class FrostCoreAdvancement {
     private static final List<ResourceKey<Biome>> BIOMES = List.of(
             Biomes.ICE_SPIKES,
             Biomes.SNOWY_SLOPES,
-            Biomes.SNOWY_TAIGA
+            Biomes.SNOWY_TAIGA,
+            Biomes.SNOWY_PLAINS
     );
 
     public static void generate(
@@ -40,7 +41,7 @@ public class FrostCoreAdvancement {
                 .display(
                         Blocks.BLUE_ICE,
                         Component.literal("Pretty Cold"),
-                        Component.literal("Travel 10000 Blocks on Ice and got to the biomes Ice Spikes, Snowy Slopes & Snowy Taiga"),
+                        Component.literal("Travel 10000 Blocks on Ice and got to the biomes Ice Spikes, Snowy Slopes, Snowy Taiga and Snowy Plains"),
                         null,
                         AdvancementType.CHALLENGE,
                         true,
