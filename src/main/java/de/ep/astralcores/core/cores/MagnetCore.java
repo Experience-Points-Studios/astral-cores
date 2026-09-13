@@ -1,5 +1,6 @@
 package de.ep.astralcores.core.cores;
 
+import de.ep.astralcores.config.ConfigManager;
 import de.ep.astralcores.core.Core;
 import de.ep.astralcores.core.CoreType;
 import de.ep.astralcores.core.cores.logic.MagnetCoreLogic;
@@ -51,7 +52,7 @@ public class MagnetCore extends Core {
                                 .withStyle(ChatFormatting.GRAY)
                 ),
                 10010,
-                20,
+                ConfigManager.get().cores.magnet_core.active_cooldown,
                 0,
                 86400L,
                 "Magnetic Pull",

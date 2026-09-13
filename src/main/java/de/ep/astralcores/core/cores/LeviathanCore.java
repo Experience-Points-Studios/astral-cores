@@ -1,5 +1,6 @@
 package de.ep.astralcores.core.cores;
 
+import de.ep.astralcores.config.ConfigManager;
 import de.ep.astralcores.core.Core;
 import de.ep.astralcores.core.CoreType;
 import de.ep.astralcores.core.cores.logic.LeviathanCoreLogic;
@@ -51,7 +52,7 @@ public class LeviathanCore extends Core {
                                 .withStyle(ChatFormatting.GRAY)
                 ),
                 10009,
-                30,
+                ConfigManager.get().cores.leviathan_core.active_cooldown,
                 0,
                 86400L,
                 "Whirlpool",

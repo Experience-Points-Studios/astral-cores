@@ -1,5 +1,6 @@
 package de.ep.astralcores.core.cores;
 
+import de.ep.astralcores.config.ConfigManager;
 import de.ep.astralcores.core.Core;
 import de.ep.astralcores.core.CoreType;
 import de.ep.astralcores.core.cores.logic.ChronoCoreLogic;
@@ -51,7 +52,7 @@ public class ChronoCore extends Core {
                                 .withStyle(ChatFormatting.GRAY)
                 ),
                 10006,
-                45,
+                ConfigManager.get().cores.chrono_core.active_cooldown,
                 600,
                 86400L,
                 "Time Return",

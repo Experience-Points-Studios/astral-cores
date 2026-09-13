@@ -1,5 +1,6 @@
 package de.ep.astralcores.core.cores;
 
+import de.ep.astralcores.config.ConfigManager;
 import de.ep.astralcores.core.Core;
 import de.ep.astralcores.core.CoreType;
 import de.ep.astralcores.core.cores.logic.FrostCoreLogic;
@@ -51,7 +52,7 @@ public final class FrostCore extends Core {
                                 .withStyle(ChatFormatting.GRAY)
                 ),
                 10008,
-                25,
+                ConfigManager.get().cores.frost_core.active_cooldown,
                 0,
                 86400L,
                 "Frost Lock",

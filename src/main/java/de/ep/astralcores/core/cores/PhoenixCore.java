@@ -1,5 +1,6 @@
 package de.ep.astralcores.core.cores;
 
+import de.ep.astralcores.config.ConfigManager;
 import de.ep.astralcores.core.Core;
 import de.ep.astralcores.core.CoreType;
 import de.ep.astralcores.core.cores.logic.PhoenixCoreLogic;
@@ -51,7 +52,7 @@ public class PhoenixCore extends Core {
                                 .withStyle(ChatFormatting.GRAY)
                 ),
                 10003,
-                30,
+                ConfigManager.get().cores.phoenix_core.active_cooldown,
                 0,
                 86400L,
                 "Phoenix Burst",
