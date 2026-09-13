@@ -107,17 +107,12 @@ public class PlayerEventsListener {
                 return true;
             }
 
-            if (!source.is(DamageTypes.FALL)) {
-                if (!AeroCoreLogic.handleFallShockwave(player, source)) {
-                    return false;
-                }
-                return true;
+            if (source.is(DamageTypes.FALL)) {
+                return AeroCoreLogic.handleFallShockwave(player);
             }
 
             if (source.is(DamageTypes.PLAYER_ATTACK)) {
-                if (!IllusionCoreLogic.handleMirrorImage(player, source)) {
-                    return false;
-                }
+                return IllusionCoreLogic.handleMirrorImage(player, source);
             }
 
             return true;

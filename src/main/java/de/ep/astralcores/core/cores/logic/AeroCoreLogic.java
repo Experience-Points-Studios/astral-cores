@@ -40,8 +40,7 @@ public class AeroCoreLogic {
     }
 
     public static boolean handleFallShockwave(
-            ServerPlayer player,
-            DamageSource source
+            ServerPlayer player
     ) {
         PlayerData data = AstralCores.PLAYER_DATA.get(player);
 
