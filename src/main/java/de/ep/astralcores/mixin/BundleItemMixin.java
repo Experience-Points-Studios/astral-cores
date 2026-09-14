@@ -1,5 +1,6 @@
 package de.ep.astralcores.mixin;
 
+import de.ep.astralcores.config.ConfigManager;
 import de.ep.astralcores.core.CoreFactory;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
@@ -23,10 +24,7 @@ public class BundleItemMixin {
         if (slot.container instanceof Inventory) {
             return;
         }
-
-        // Rejects the interaction if the item stack trying to enter the container bundle is a registered core
-        if (CoreFactory.isCore(other)) {
-            cir.setReturnValue(false);
-        }
+        if (ConfigManager.get().general.only_allow_inventory)
+            cir.setReturnValue(!CoreFactory.isOrContainsCore(other));
     }
 }

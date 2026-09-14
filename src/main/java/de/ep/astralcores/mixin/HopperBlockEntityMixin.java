@@ -1,5 +1,6 @@
 package de.ep.astralcores.mixin;
 
+import de.ep.astralcores.config.ConfigManager;
 import de.ep.astralcores.core.CoreFactory;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -25,8 +26,7 @@ public class HopperBlockEntityMixin {
     ) {
         ItemStack stack = entity.getItem();
 
-        if (CoreFactory.isCore(stack)) {
-            cir.setReturnValue(false);
-        }
+        if (ConfigManager.get().general.only_allow_inventory)
+            cir.setReturnValue(!CoreFactory.isOrContainsCore(stack));
     }
 }

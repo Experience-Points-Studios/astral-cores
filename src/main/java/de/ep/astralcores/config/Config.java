@@ -14,6 +14,8 @@ public class Config {
     public static class General {
         @Comment("Should the equipped core be removed from the slot when a player dies?")
         public boolean drop_core_on_death = true;
+        @Comment("Should core items be restricted exclusively to player inventories, blocking e.g. chests, shulker boxes, and item frames ?")
+        public boolean only_allow_inventory = true;
     }
 
     public static class Cores {

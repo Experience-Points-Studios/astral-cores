@@ -9,6 +9,7 @@
     "HopperBlockEntityMixin",
     "InventoryMixin",
     "ItemEntityMixin",
+    "ItemFrameMixin",
     "LivingEntityMixin",
     "MannequinAccessor",
     "MobMixin",

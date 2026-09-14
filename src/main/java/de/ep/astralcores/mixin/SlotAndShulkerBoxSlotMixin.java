@@ -1,5 +1,6 @@
 package de.ep.astralcores.mixin;
 
+import de.ep.astralcores.config.ConfigManager;
 import de.ep.astralcores.core.CoreFactory;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.player.Inventory;
@@ -25,21 +26,8 @@ public class SlotAndShulkerBoxSlotMixin {
         }
 
         // Rejects placement if the item being moved is identified as a registered core module
-        if (CoreFactory.isCore(stack)) {
+        if (ConfigManager.get().general.only_allow_inventory && CoreFactory.isOrContainsCore(stack)) {
             cir.setReturnValue(false);
-            return;
-        }
-
-        // Extracts internal data bundles to verify nested contents for hidden core structures
-        BundleContents bundleData = stack.get(DataComponents.BUNDLE_CONTENTS);
-        if (bundleData != null) {
-            for (var template : bundleData.items()) {
-                // Intercepts the action if a player attempts to bypass container blacklists using bundles
-                if (CoreFactory.isCore(template)) {
-                    cir.setReturnValue(false);
-                    return;
-                }
-            }
         }
     }
 }

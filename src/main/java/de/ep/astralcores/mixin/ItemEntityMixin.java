@@ -1,5 +1,6 @@
 package de.ep.astralcores.mixin;
 
+import de.ep.astralcores.config.ConfigManager;
 import de.ep.astralcores.core.Core;
 import de.ep.astralcores.core.CoreFactory;
 import de.ep.astralcores.core.respawn.CoreRespawnManager;
@@ -42,9 +43,12 @@ public abstract class ItemEntityMixin {
         ItemStack stack =
                 this.getItem();
 
-        if (!CoreFactory.isCore(stack)) {
+        if (!CoreFactory.isOrContainsCore(stack)) {
             return;
         }
+
+        // Activate the glowing outline effect on the entity
+        entity.setGlowingTag(true);
 
         // Core items never despawn normally.
         this.age = 0;
@@ -55,8 +59,7 @@ public abstract class ItemEntityMixin {
         }
 
         // Core has fallen into the void.
-        if (entity.getY()
-                < entity.level().getMinY() - 64) {
+        if (entity.getY() < entity.level().getMinY() - 5) {
 
             Optional<Core> core =
                     CoreFactory.getCoreFromItem(stack);
@@ -85,7 +88,7 @@ public abstract class ItemEntityMixin {
             float damage,
             CallbackInfoReturnable<Boolean> cir
     ) {
-        if (!CoreFactory.isCore(this.getItem())) {
+        if (!CoreFactory.isOrContainsCore(this.getItem())) {
             return;
         }
 

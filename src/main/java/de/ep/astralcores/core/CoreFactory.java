@@ -1,9 +1,11 @@
 package de.ep.astralcores.core;
 
+import de.ep.astralcores.AstralCores;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.component.BundleContents;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.CustomModelData;
 import net.minecraft.world.item.component.ItemLore;
@@ -140,4 +142,48 @@ public class CoreFactory {
         // Verify the item is actually a core by attempting to retrieve it
         return getCoreFromItem(stackTemplate.create()).isPresent();
     }
+
+    // Checks if the item or its nested contents contain a Core item
+    public static boolean isOrContainsCore(ItemStack stack) {
+        // Safety check for empty or null stacks
+        if (stack == null || stack.isEmpty()) {
+            // Return false if there is no item to check
+            return false;
+        }
+
+        // Base check to see if the item itself is a Core item
+        if (isCore(stack)) {
+            // Return true if the item is a Core item
+            return true;
+        }
+
+        // Extract the bundle contents data component
+        BundleContents bundleData = stack.get(DataComponents.BUNDLE_CONTENTS);
+        // Check if the item is a bundle and contains items
+        if (bundleData != null) {
+            // Loop through each template stored inside the bundle
+            for (ItemStackTemplate template : bundleData.items()) {
+                // Instantiate the actual stack using the server instance
+                ItemStack innerItem = template.create();
+                // Recursively check if the inner item contains a Core item
+                if (isOrContainsCore(innerItem)) {
+                    // Return true if a nested Core item is found
+                    return true;
+                }
+            }
+        }
+
+        // Extract the container data component for Shulker boxes
+        var containerData = stack.get(DataComponents.CONTAINER);
+        // Check if the item is a container and contains items
+        if (containerData != null) {
+            // Check if the stream found a Core item at any depth and return the result
+            return containerData.nonEmptyItemCopyStream()
+                    .anyMatch(CoreFactory::isOrContainsCore);
+        }
+
+        // Return false if no Core item was found anywhere
+        return false;
+    }
+
 }

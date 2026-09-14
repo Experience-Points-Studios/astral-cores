@@ -19,7 +19,6 @@ public class InventoryMixin {
     @Inject(method = "setChanged", at = @At("TAIL"))
     private void astralcores$onInventoryChanged(CallbackInfo ci) {
         if (this.player instanceof ServerPlayer serverPlayer) {
-
             TriggerManager.onInventoryChange(serverPlayer);
         }
     }
