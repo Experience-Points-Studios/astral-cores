@@ -2,12 +2,10 @@ package de.ep.astralcores.mixin;
 
 import de.ep.astralcores.config.ConfigManager;
 import de.ep.astralcores.core.CoreFactory;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ShulkerBoxSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.BundleContents;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,7 +16,7 @@ public class SlotAndShulkerBoxSlotMixin {
 
     // Overrides insertion checks for both standard containers and shulker box slots server-side
     @Inject(method = "mayPlace", at = @At("HEAD"), cancellable = true)
-    private void astralcores$preventCoreContainerPlacement(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+    private void astralcores$preventCoreContainerPlacement(ItemStack itemStack, CallbackInfoReturnable<Boolean> cir) {
 
         // Bypasses the validation if the target slot belongs to the player's personal inventory profile
         if (((Slot) (Object) this).container instanceof Inventory) {
@@ -26,7 +24,7 @@ public class SlotAndShulkerBoxSlotMixin {
         }
 
         // Rejects placement if the item being moved is identified as a registered core module
-        if (ConfigManager.get().general.only_allow_inventory && CoreFactory.isOrContainsCore(stack)) {
+        if (ConfigManager.get().general.only_allow_inventory && CoreFactory.isOrContainsCore(itemStack)) {
             cir.setReturnValue(false);
         }
     }

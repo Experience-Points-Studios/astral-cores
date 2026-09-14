@@ -24,7 +24,10 @@ public class BundleItemMixin {
         if (slot.container instanceof Inventory) {
             return;
         }
-        if (ConfigManager.get().general.only_allow_inventory)
-            cir.setReturnValue(!CoreFactory.isOrContainsCore(other));
+
+        if (ConfigManager.get().general.only_allow_inventory && CoreFactory.isOrContainsCore(other)) {
+            // Rejects the interaction if the item stack trying to enter the container bundle is a registered core
+            cir.setReturnValue(false);
+        }
     }
 }
