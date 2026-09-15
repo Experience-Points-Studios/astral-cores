@@ -31,20 +31,12 @@ public class PhoenixCoreAdvancement {
 
     public static void generate(
             HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
-    ) {
-        warmLiving(
-                lookup,
-                consumer
-        );
-    }
-
-    private static void warmLiving(
-            HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
+            Consumer<AdvancementHolder> consumer,
+            AdvancementHolder root
     ) {
         Advancement.Builder builder =
                 Advancement.Builder.advancement()
+                        .parent(root)
                         .display(
                                 Items.BLAZE_POWDER,
                                 Component.literal(
@@ -53,7 +45,6 @@ public class PhoenixCoreAdvancement {
                                 Component.literal(
                                         "Be for 12h in the nether and visit every nether biome"
                                 ),
-                                null,
                                 AdvancementType.CHALLENGE,
                                 true,
                                 true,

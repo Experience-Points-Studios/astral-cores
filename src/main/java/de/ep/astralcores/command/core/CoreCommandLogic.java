@@ -12,6 +12,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Locale;
@@ -58,7 +59,7 @@ public class CoreCommandLogic {
                 CoreFactory.createStack(core);
 
         if (!target.getInventory().add(itemStack)) {
-            target.drop(itemStack, false);
+            target.drop(itemStack, false, Prediction.SERVER_ONLY);
         }
 
         source.sendSuccess(
@@ -90,7 +91,7 @@ public class CoreCommandLogic {
             ItemStack itemStack = CoreFactory.createStack(core);
 
             if (!target.getInventory().add(itemStack)) {
-                target.drop(itemStack, false);
+                target.drop(itemStack, false, Prediction.SERVER_ONLY);
             }
         }
 

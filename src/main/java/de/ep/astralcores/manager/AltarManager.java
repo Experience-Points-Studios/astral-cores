@@ -35,7 +35,7 @@ public class AltarManager {
         }
 
         Optional<StructureTemplate> template =
-                level.getStructureManager()
+                level.getStructureTemplateManager()
                         .get(ALTAR_STRUCTURE);
 
         if (template.isEmpty()) {

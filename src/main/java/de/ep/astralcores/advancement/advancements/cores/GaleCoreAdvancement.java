@@ -26,23 +26,17 @@ public class GaleCoreAdvancement {
     public static void generate(
 
             HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
-    ) {
-        itNeedsToBeFast(lookup, consumer);
-    }
-
-    private static void itNeedsToBeFast(
-            HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
+            Consumer<AdvancementHolder> consumer,
+            AdvancementHolder root
     ) {
         Advancement.Builder.advancement()
+                .parent(root)
                 .display(
                         Items.BREEZE_ROD,
                         Component.literal("It needs to be FAST!!!"),
                         Component.literal(
                                 "Have Speed 2, Dolphins Grace and Netherite Boots with Soul Speed 3 while walking on soul sand"
                         ),
-                        null,
                         AdvancementType.CHALLENGE,
                         true,
                         true,

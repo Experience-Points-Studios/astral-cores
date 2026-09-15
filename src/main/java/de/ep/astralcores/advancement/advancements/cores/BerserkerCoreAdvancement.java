@@ -22,21 +22,16 @@ public class BerserkerCoreAdvancement {
 
     public static void generate(
 
-            Consumer<AdvancementHolder> consumer
+            Consumer<AdvancementHolder> consumer,
+            AdvancementHolder root
 
-    ) {
-        dareDevil(consumer);
-    }
-
-    private static void dareDevil(
-            Consumer<AdvancementHolder> consumer
     ) {
         Advancement.Builder builder = Advancement.Builder.advancement()
+                .parent(root)
                 .display(
                         Items.BLAZE_POWDER,
                         Component.literal("Dare Devil"),
                         Component.literal("Kill 20 Piglins, 100 Zombified Piglins and 10 Piglin Brutes"),
-                        null,
                         AdvancementType.CHALLENGE,
                         true,
                         true,

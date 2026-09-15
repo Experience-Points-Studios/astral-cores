@@ -13,22 +13,15 @@ import java.util.function.Consumer;
 public class GravityCoreAdvancement {
 
     public static void generate(
-            HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
-    ) {
-        thatsHeavy(lookup, consumer);
-    }
-
-    private static void thatsHeavy(
-            HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
+            Consumer<AdvancementHolder> consumer,
+            AdvancementHolder root
     ) {
         Advancement.Builder.advancement()
+                .parent(root)
                 .display(
-                        Blocks.ANVIL,
+                        Blocks.ANVIL.asItem(),
                         Component.literal("That's heavy!"),
                         Component.literal("Get 2 stacks of Anvils"),
-                        null,
                         AdvancementType.CHALLENGE,
                         true,
                         true,

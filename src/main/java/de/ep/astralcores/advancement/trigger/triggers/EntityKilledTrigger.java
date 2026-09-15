@@ -3,14 +3,15 @@ package de.ep.astralcores.advancement.trigger.triggers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.ep.astralcores.advancement.trigger.TriggerRegistry;
-import net.minecraft.advancements.predicates.ContextAwarePredicate;
 import net.minecraft.advancements.predicates.MinMaxBounds;
 import net.minecraft.advancements.triggers.Criterion;
 import net.minecraft.advancements.triggers.SimpleCriterionTrigger;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
 import java.util.Optional;
 
@@ -30,14 +31,14 @@ public class EntityKilledTrigger
     }
 
     public record TriggerInstance(
-            Optional<ContextAwarePredicate> player,
+            Optional<Holder<LootItemCondition>> player,
             EntityType<?> entityType,
             MinMaxBounds.Ints count
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
         public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                        ContextAwarePredicate.CODEC.optionalFieldOf("player")
+                        LootItemCondition.CODEC.optionalFieldOf("player")
                                 .forGetter(TriggerInstance::player),
 
                         BuiltInRegistries.ENTITY_TYPE.byNameCodec()
@@ -52,7 +53,7 @@ public class EntityKilledTrigger
         );
 
         @Override
-        public Optional<ContextAwarePredicate> player() {
+        public Optional<Holder<LootItemCondition>> player() {
             return player;
         }
 

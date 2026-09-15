@@ -10,6 +10,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.item.ItemStack;
 
 public class WithdrawCommandLogic {
@@ -53,7 +54,7 @@ public class WithdrawCommandLogic {
 
         // Adds the core item to the inventory or drops it on the ground if full
         if (!player.getInventory().add(coreStack)) {
-            player.drop(coreStack, false);
+            player.drop(coreStack, false, Prediction.SERVER_ONLY);
         }
 
         source.sendSuccess(() -> Component.literal("Successfully withdrew ")

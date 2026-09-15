@@ -299,8 +299,6 @@ public final class LeviathanCoreLogic {
                     direction.scale(PULL_SPEED)
             );
 
-            target.hurtMarked = true;
-
             isPulling = true;
 
             lowestTicksLeft =

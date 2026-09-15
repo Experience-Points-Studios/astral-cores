@@ -1,9 +1,10 @@
 package de.ep.astralcores.advancement.trigger.triggers;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.advancements.predicates.ContextAwarePredicate;
 import net.minecraft.advancements.triggers.SimpleCriterionTrigger;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -45,22 +46,15 @@ public class VoidSurvivalTrigger extends SimpleCriterionTrigger<VoidSurvivalTrig
     }
 
     public record Conditions(
-            Optional<ContextAwarePredicate> playerPredicate
+            Optional<Holder<LootItemCondition>> player
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
-        // JSON configuration codec
         public static final Codec<Conditions> CODEC =
-                ContextAwarePredicate.CODEC
+                LootItemCondition.CODEC
                         .optionalFieldOf("player")
                         .xmap(Conditions::new, Conditions::player)
                         .codec();
 
-        @Override
-        public Optional<ContextAwarePredicate> player() {
-            return this.playerPredicate;
-        }
-
-        // Validate criterion conditions
         public boolean requirementsMet(ServerPlayer player) {
             return true;
         }

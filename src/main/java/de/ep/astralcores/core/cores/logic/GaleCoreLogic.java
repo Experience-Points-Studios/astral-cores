@@ -48,8 +48,6 @@ public final class GaleCoreLogic {
                 look.z * 5
         );
 
-        player.hurtMarked = true;
-
         // Starts a 10-tick timer before the Sonic Dash explosion.
         explosionTimers.put(
                 player.getUUID(),

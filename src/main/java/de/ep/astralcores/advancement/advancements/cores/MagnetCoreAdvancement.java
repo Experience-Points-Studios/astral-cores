@@ -13,15 +13,11 @@ import java.util.function.Consumer;
 public class MagnetCoreAdvancement {
 
     public static void generate(
-            Consumer<AdvancementHolder> consumer
-    ) {
-        magneticField(consumer);
-    }
-
-    private static void magneticField(
-            Consumer<AdvancementHolder> consumer
+            Consumer<AdvancementHolder> consumer,
+            AdvancementHolder root
     ) {
         Advancement.Builder.advancement()
+                .parent(root)
                 .display(
                         Items.COMPASS,
                         Component.literal(
@@ -30,7 +26,6 @@ public class MagnetCoreAdvancement {
                         Component.literal(
                                 "Have 9 Lodestone Compasses linked to different Lodestones and 3 Recovery Compasses"
                         ),
-                        null,
                         AdvancementType.CHALLENGE,
                         true,
                         true,

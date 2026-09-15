@@ -1,4 +1,5 @@
 {
+  "parent": "astralcores:root",
   "criteria": {
     "has_128_anvils": {
       "conditions": {

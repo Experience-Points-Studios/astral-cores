@@ -9,6 +9,7 @@ import de.ep.astralcores.core.Core;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
@@ -41,7 +42,7 @@ public class CoreInteractLogic {
 
             // Adds the core item to the inventory or drops it on the ground if full
             if (!player.getInventory().add(coreStack)) {
-                player.drop(coreStack, false);
+                player.drop(coreStack, false, Prediction.SERVER_ONLY);
             }
         }
 

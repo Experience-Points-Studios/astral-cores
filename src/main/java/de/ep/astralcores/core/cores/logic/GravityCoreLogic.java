@@ -158,14 +158,12 @@ public final class GravityCoreLogic {
                 Math.min(velocity.y, 0.05),
                 direction.z * 0.65
         );
-
-        target.hurtMarked = true;
     }
 
     private static void spawnPullParticles(
             ServerPlayer player
     ) {
-        ServerLevel level = (ServerLevel) player.level();
+        ServerLevel level = player.level();
 
         Vec3 center =
                 player.position().add(0, 0.15, 0);

@@ -28,21 +28,15 @@ public class FrostCoreAdvancement {
     public static void generate(
 
             HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
-    ) {
-        prettyCold(lookup, consumer);
-    }
-
-    private static void prettyCold(
-            HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
+            Consumer<AdvancementHolder> consumer,
+            AdvancementHolder root
     ) {
         Advancement.Builder builder = Advancement.Builder.advancement()
+                .parent(root)
                 .display(
-                        Blocks.BLUE_ICE,
+                        Blocks.BLUE_ICE.asItem(),
                         Component.literal("Pretty Cold"),
                         Component.literal("Travel 10000 Blocks on Ice and got to the biomes Ice Spikes, Snowy Slopes, Snowy Taiga and Snowy Plains"),
-                        null,
                         AdvancementType.CHALLENGE,
                         true,
                         true,
