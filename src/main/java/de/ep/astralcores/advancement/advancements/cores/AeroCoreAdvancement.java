@@ -21,21 +21,15 @@ public class AeroCoreAdvancement {
     public static void generate(
 
             HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
-    ) {
-        skyPig(lookup, consumer);
-    }
-
-    private static void skyPig(
-            HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
+            Consumer<AdvancementHolder> consumer,
+            AdvancementHolder root
     ) {
         Advancement.Builder.advancement()
+                .parent(root)
                 .display(
                         Items.WIND_CHARGE,
                         Component.literal("Sky Pig"),
                         Component.literal("Ride a pig above Y=5000."),
-                        null,
                         AdvancementType.CHALLENGE,
                         true,
                         true,

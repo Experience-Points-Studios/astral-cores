@@ -39,17 +39,16 @@ public class IllusionCoreAdvancement {
             MobEffects.INFESTED
     );
 
-    public static void generate(Consumer<AdvancementHolder> consumer) {
-        masterOfBrewing(consumer);
-    }
-
-    private static void masterOfBrewing(Consumer<AdvancementHolder> consumer) {
+    public static void generate(
+            Consumer<AdvancementHolder> consumer,
+            AdvancementHolder root
+    ) {
         Advancement.Builder builder = Advancement.Builder.advancement()
+                .parent(root)
                 .display(
                         Items.AMETHYST_SHARD,
                         Component.literal("Master of Brewing"),
                         Component.literal("Have all brewable potion effects at the same time"),
-                        null,
                         AdvancementType.CHALLENGE,
                         true,
                         true,

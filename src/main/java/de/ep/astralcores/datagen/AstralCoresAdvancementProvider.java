@@ -1,5 +1,6 @@
 package de.ep.astralcores.datagen;
 
+import de.ep.astralcores.advancement.advancements.AstralCoresRootAdvancement;
 import de.ep.astralcores.advancement.advancements.cores.*;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
@@ -24,17 +25,19 @@ public class AstralCoresAdvancementProvider extends FabricAdvancementProvider {
             HolderLookup.Provider lookup,
             Consumer<AdvancementHolder> consumer
     ) {
-        AeroCoreAdvancement.generate(lookup, consumer);
-        ShadowCoreAdvancement.generate(consumer);
-        NatureCoreAdvancement.generate(lookup, consumer);
-        ChronoCoreAdvancement.generate(lookup, consumer);
-        LeviathanCoreAdvancement.generate(lookup, consumer);
-        GaleCoreAdvancement.generate(lookup, consumer);
-        PhoenixCoreAdvancement.generate(lookup, consumer);
-        BerserkerCoreAdvancement.generate(consumer);
-        GravityCoreAdvancement.generate(lookup, consumer);
-        MagnetCoreAdvancement.generate(consumer);
-        FrostCoreAdvancement.generate(lookup, consumer);
-        IllusionCoreAdvancement.generate(consumer);
+        AdvancementHolder root = AstralCoresRootAdvancement.generate(consumer);
+
+        AeroCoreAdvancement.generate(lookup, consumer, root);
+        ShadowCoreAdvancement.generate(consumer, root);
+        NatureCoreAdvancement.generate(lookup, consumer, root);
+        ChronoCoreAdvancement.generate(lookup, consumer, root);
+        LeviathanCoreAdvancement.generate(consumer, root);
+        GaleCoreAdvancement.generate(lookup, consumer, root);
+        PhoenixCoreAdvancement.generate(lookup, consumer, root);
+        BerserkerCoreAdvancement.generate(consumer, root);
+        GravityCoreAdvancement.generate(consumer, root);
+        MagnetCoreAdvancement.generate(consumer, root);
+        FrostCoreAdvancement.generate(lookup, consumer, root);
+        IllusionCoreAdvancement.generate(consumer, root);
     }
 }

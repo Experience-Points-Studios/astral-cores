@@ -2,14 +2,15 @@ package de.ep.astralcores.advancement.trigger.triggers;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.advancements.predicates.ContextAwarePredicate;
 import net.minecraft.advancements.triggers.SimpleCriterionTrigger;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.HashMap;
@@ -99,7 +100,7 @@ public class TraveledOnBlockTrigger
     }
 
     public record Conditions(
-            Optional<ContextAwarePredicate> playerPredicate,
+            Optional<Holder<LootItemCondition>> player,
             Block block,
             double distance
     ) implements SimpleCriterionTrigger.SimpleInstance {
@@ -111,7 +112,7 @@ public class TraveledOnBlockTrigger
                 RecordCodecBuilder.create(instance -> instance.group(
                         // The player predicate is optional and can contain additional
                         // conditions about the player who activates the trigger.
-                        ContextAwarePredicate.CODEC
+                        LootItemCondition.CODEC
                                 .optionalFieldOf("player")
                                 .forGetter(Conditions::player),
 
@@ -129,8 +130,8 @@ public class TraveledOnBlockTrigger
                 ).apply(instance, Conditions::new));
 
         @Override
-        public Optional<ContextAwarePredicate> player() {
-            return playerPredicate;
+        public Optional<Holder<LootItemCondition>> player() {
+            return player;
         }
 
         // Checks whether the block underneath the player matches the required block

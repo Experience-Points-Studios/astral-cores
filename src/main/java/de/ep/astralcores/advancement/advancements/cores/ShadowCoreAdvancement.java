@@ -14,22 +14,19 @@ import java.util.function.Consumer;
 
 public class ShadowCoreAdvancement {
 
-    private ShadowCoreAdvancement() {
-    }
-
     public static void generate(
-
-            Consumer<AdvancementHolder> consumer
+            Consumer<AdvancementHolder> consumer,
+            AdvancementHolder root
 
     ) {
         Advancement.Builder.advancement()
+                .parent(root)
                 .display(
                         Items.ENDER_EYE,
                         Component.literal("Where did I go"),
                         Component.literal(
                                 "Disappear into the void and survive it."
                         ),
-                        null,
                         AdvancementType.CHALLENGE,
                         true,
                         true,

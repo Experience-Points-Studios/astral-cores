@@ -3,13 +3,14 @@ package de.ep.astralcores.advancement.trigger.triggers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.ep.astralcores.advancement.trigger.TriggerRegistry;
-import net.minecraft.advancements.predicates.ContextAwarePredicate;
 import net.minecraft.advancements.triggers.Criterion;
 import net.minecraft.advancements.triggers.SimpleCriterionTrigger;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
 import java.util.Optional;
 
@@ -43,14 +44,14 @@ public class HasItemCountTrigger extends SimpleCriterionTrigger<HasItemCountTrig
     }
 
     public record TriggerInstance(
-            Optional<ContextAwarePredicate> player,
+            Optional<Holder<LootItemCondition>> player,
             Item item,
             int count
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
         // JSON configuration codec for serializing and deserializing the criteria parameters
         public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                ContextAwarePredicate.CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player),
+                LootItemCondition.CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player),
                 BuiltInRegistries.ITEM.byNameCodec().fieldOf("item").forGetter(TriggerInstance::item),
                 Codec.INT.fieldOf("count").forGetter(TriggerInstance::count)
         ).apply(instance, TriggerInstance::new));

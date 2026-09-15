@@ -19,21 +19,15 @@ public class ChronoCoreAdvancement {
     public static void generate(
 
             HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
-    ) {
-        timerTraveler(lookup, consumer);
-    }
-
-    private static void timerTraveler(
-            HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
+            Consumer<AdvancementHolder> consumer,
+            AdvancementHolder root
     ) {
         Advancement.Builder.advancement()
+                .parent(root)
                 .display(
                         Items.WIND_CHARGE,
                         Component.literal("Time Traveler"),
                         Component.literal("Ride every type of horse"),
-                        null,
                         AdvancementType.CHALLENGE,
                         true,
                         true,

@@ -1,0 +1,23 @@
+{
+  "criteria": {
+    "root": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:gui/advancements/backgrounds/stone",
+    "description": "Discover the Astral Cores.",
+    "icon": {
+      "id": "minecraft:nether_star"
+    },
+    "show_toast": false,
+    "title": "Astral Cores"
+  },
+  "requirements": [
+    [
+      "root"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

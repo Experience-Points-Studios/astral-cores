@@ -18,23 +18,15 @@ import java.util.function.Consumer;
 public class LeviathanCoreAdvancement {
 
     public static void generate(
-
-            HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
-    ) {
-        whatABreath(lookup, consumer);
-    }
-
-    private static void whatABreath(
-            HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
+            Consumer<AdvancementHolder> consumer,
+            AdvancementHolder root
     ) {
         Advancement.Builder.advancement()
+                .parent(root)
                 .display(
-                        Blocks.CONDUIT,
+                        Blocks.CONDUIT.asItem(),
                         Component.literal("What a breath"),
                         Component.literal("Have Conduit Power, Water breathing & Dolphins Grace at the same time."),
-                        null,
                         AdvancementType.CHALLENGE,
                         true,
                         true,

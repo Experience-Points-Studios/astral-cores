@@ -1,4 +1,5 @@
 {
+  "parent": "astralcores:root",
   "criteria": {
     "void_survival": {
       "trigger": "astralcores:void_survival"

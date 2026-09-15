@@ -5,6 +5,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -34,10 +35,10 @@ public class CropUtils {
 
             // Checks if the block can be grown using bonemeal
             if (block instanceof BonemealableBlock bonemealable) {
-                if (bonemealable.isValidBonemealTarget(level, targetPos, state)) {
+                if (bonemealable.isValidBonemealTarget(level, targetPos, state, BonemealSource.INTERACTION)) {
 
                     // Advances the block growth stage
-                    bonemealable.performBonemeal(level, level.getRandom(), targetPos, state);
+                    bonemealable.performBonemeal(level, level.getRandom(), targetPos, state, BonemealSource.INTERACTION);
 
                     // Spawns green happy villager particles at the crop position
                     level.sendParticles(

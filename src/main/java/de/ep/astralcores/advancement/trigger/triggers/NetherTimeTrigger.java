@@ -3,10 +3,11 @@ package de.ep.astralcores.advancement.trigger.triggers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.ep.astralcores.manager.NetherTimeManager;
-import net.minecraft.advancements.predicates.ContextAwarePredicate;
 import net.minecraft.advancements.triggers.SimpleCriterionTrigger;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
 import java.util.Optional;
 
@@ -45,7 +46,7 @@ public class NetherTimeTrigger
     }
 
     public record Conditions(
-            Optional<ContextAwarePredicate> player,
+            Optional<Holder<LootItemCondition>> player,
             long requiredTicks
     ) implements SimpleCriterionTrigger.SimpleInstance {
 
@@ -53,7 +54,7 @@ public class NetherTimeTrigger
                 RecordCodecBuilder.create(instance ->
                         instance.group(
 
-                                ContextAwarePredicate.CODEC
+                                LootItemCondition.CODEC
                                         .optionalFieldOf("player")
                                         .forGetter(
                                                 Conditions::player

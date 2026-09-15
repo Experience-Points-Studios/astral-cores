@@ -1,4 +1,5 @@
 {
+  "parent": "astralcores:root",
   "criteria": {
     "entity.minecraft.piglin": {
       "conditions": {
@@ -41,10 +42,10 @@
       "entity.minecraft.piglin_brute"
     ],
     [
-      "entity.minecraft.piglin"
+      "entity.minecraft.zombified_piglin"
     ],
     [
-      "entity.minecraft.zombified_piglin"
+      "entity.minecraft.piglin"
     ]
   ],
   "rewards": {

@@ -33,7 +33,8 @@ public class NatureCoreAdvancement {
             Biomes.MANGROVE_SWAMP,
             Biomes.SAVANNA,
             Biomes.MUSHROOM_FIELDS,
-            Biomes.MEADOW
+            Biomes.MEADOW,
+            Biomes.DAPPLED_FOREST
     );
 
     private static final List<Item> FLOWERS = List.of(
@@ -69,28 +70,23 @@ public class NatureCoreAdvancement {
             Items.MANGROVE_PROPAGULE,
             Items.OAK_SAPLING,
             Items.PALE_OAK_SAPLING,
-            Items.SPRUCE_SAPLING
+            Items.SPRUCE_SAPLING,
+            Items.POPLAR_SAPLING
     );
 
     public static void generate(
             HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
-    ) {
-        bestBotanic(lookup, consumer);
-    }
-
-    private static void bestBotanic(
-            HolderLookup.Provider lookup,
-            Consumer<AdvancementHolder> consumer
+            Consumer<AdvancementHolder> consumer,
+            AdvancementHolder root
     ) {
         Advancement.Builder builder = Advancement.Builder.advancement()
+                .parent(root)
                 .display(
-                        Blocks.OAK_LEAVES,
+                        Blocks.OAK_LEAVES.asItem(),
                         Component.literal("Best Botanic"),
                         Component.literal(
                                 "Collect every flower and sapling from the Overworld"
                         ),
-                        null,
                         AdvancementType.CHALLENGE,
                         true,
                         true,
