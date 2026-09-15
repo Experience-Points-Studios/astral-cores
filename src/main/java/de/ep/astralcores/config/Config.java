@@ -2,19 +2,18 @@ package de.ep.astralcores.config;
 
 import blue.endless.jankson.Comment;
 
-// Defines the root configuration structure for the mod settings
 public class Config {
 
     @Comment("General core mechanics and server rules")
     public General general = new General();
+
     public Cores cores = new Cores();
 
-
-    // Nested configurations containing base server rules
     public static class General {
         @Comment("Should the equipped core be removed from the slot when a player dies?")
         public boolean drop_core_on_death = true;
-        @Comment("Should core items be restricted exclusively to player inventories, blocking e.g. chests, shulker boxes, and item frames ?")
+
+        @Comment("Should core items be restricted exclusively to player inventories, blocking e.g. chests, shulker boxes, and item frames?")
         public boolean only_allow_inventory = true;
     }
 
@@ -34,39 +33,50 @@ public class Config {
     }
 
     public static class AeroCore {
-        public int active_cooldown = 45;
+        public int active_cooldown = 30;
     }
+
     public static class BerserkerCore {
         public int active_cooldown = 300;
     }
+
     public static class ChronoCore {
-        public int active_cooldown = 45;
+        public int active_cooldown = 30;
     }
+
     public static class FrostCore {
         public int active_cooldown = 25;
     }
+
     public static class GaleCore {
         public int active_cooldown = 30;
     }
+
     public static class GravityCore {
         public int active_cooldown = 25;
     }
+
     public static class IllusionCore {
-        public int active_cooldown = 75;
+        public int active_cooldown = 45;
     }
+
     public static class LeviathanCore {
         public int active_cooldown = 30;
     }
+
     public static class MagnetCore {
         public int active_cooldown = 20;
     }
+
     public static class NatureCore {
-        public int active_cooldown = 60;
+        public int active_cooldown = 30;
     }
+
     public static class PhoenixCore {
         public int active_cooldown = 30;
     }
+
     public static class ShadowCore {
-        public int active_cooldown = 40;
+        public int active_cooldown = 30;
     }
 }
