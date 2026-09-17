@@ -26,7 +26,8 @@ public class HopperBlockEntityMixin {
     ) {
         ItemStack stack = entity.getItem();
 
-        if (ConfigManager.get().general.only_allow_inventory)
-            cir.setReturnValue(!CoreFactory.isOrContainsCore(stack));
+        if (ConfigManager.get().general.only_allow_inventory && CoreFactory.isOrContainsCore(stack)) {
+            cir.setReturnValue(false);
+        }
     }
 }
