@@ -5,8 +5,6 @@
         "effects": {
           "minecraft:fire_resistance": {},
           "minecraft:infested": {},
-          "minecraft:instant_damage": {},
-          "minecraft:instant_health": {},
           "minecraft:invisibility": {},
           "minecraft:jump_boost": {},
           "minecraft:night_vision": {},

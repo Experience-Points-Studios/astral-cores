@@ -22,8 +22,6 @@ public class IllusionCoreAdvancement {
             MobEffects.SPEED,
             MobEffects.SLOWNESS,
             MobEffects.STRENGTH,
-            MobEffects.INSTANT_HEALTH,
-            MobEffects.INSTANT_DAMAGE,
             MobEffects.JUMP_BOOST,
             MobEffects.REGENERATION,
             MobEffects.FIRE_RESISTANCE,
