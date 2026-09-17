@@ -4,10 +4,14 @@ import de.ep.astralcores.AstralCores;
 import de.ep.astralcores.actionbar.ActionBarManager;
 import de.ep.astralcores.config.ConfigManager;
 import de.ep.astralcores.core.Core;
+import de.ep.astralcores.core.CoreFactory;
 import de.ep.astralcores.core.CoreRegistry;
 import de.ep.astralcores.core.CoreType;
 import de.ep.astralcores.playerdata.PlayerData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
 
 public class CoreDeathLogic {
 
@@ -29,6 +33,14 @@ public class CoreDeathLogic {
 
             // Clears the core type from the player data slot
             data.setEquippedCore(null);
+
+            ItemStack coreItem = CoreFactory.createStack(core);
+
+            ServerLevel level = player.level();
+
+            ItemEntity coreItemEntity = new ItemEntity(level, player.getX(), player.getY(), player.getZ(), coreItem);
+
+            level.addFreshEntity(coreItemEntity);
 
             // Updates the action bar display text immediately
             ActionBarManager.tick(player, data);
