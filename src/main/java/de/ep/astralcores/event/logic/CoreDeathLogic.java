@@ -4,10 +4,13 @@ import de.ep.astralcores.AstralCores;
 import de.ep.astralcores.actionbar.ActionBarManager;
 import de.ep.astralcores.config.ConfigManager;
 import de.ep.astralcores.core.Core;
+import de.ep.astralcores.core.CoreFactory;
 import de.ep.astralcores.core.CoreRegistry;
 import de.ep.astralcores.core.CoreType;
 import de.ep.astralcores.playerdata.PlayerData;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Prediction;
+import net.minecraft.world.item.ItemStack;
 
 public class CoreDeathLogic {
 
@@ -26,6 +29,12 @@ public class CoreDeathLogic {
             // Runs cleanup actions for the equipped core before removal
             Core core = CoreRegistry.get(equipped);
             core.onRemoved(player);
+
+            ItemStack coreItem = CoreFactory.createStack(core);
+
+            if (!player.getInventory().add(coreItem)) return; {
+                player.drop(coreItem, false, Prediction.SERVER_ONLY);
+            }
 
             // Clears the core type from the player data slot
             data.setEquippedCore(null);
