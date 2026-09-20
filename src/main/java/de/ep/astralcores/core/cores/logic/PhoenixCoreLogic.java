@@ -39,7 +39,7 @@ public final class PhoenixCoreLogic {
             Effects.applyEffect(
                     player,
                     MobEffects.REGENERATION,
-                    25,
+                    200,
                     1
             );
         }
