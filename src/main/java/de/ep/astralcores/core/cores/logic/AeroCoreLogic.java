@@ -167,7 +167,7 @@ public class AeroCoreLogic {
             return CoreActivationResult.FAILED;
         }
 
-        ServerLevel world = (ServerLevel) player.level();
+        ServerLevel world = player.level();
         Vec3 center = player.position();
 
         // Play the activation sound.
