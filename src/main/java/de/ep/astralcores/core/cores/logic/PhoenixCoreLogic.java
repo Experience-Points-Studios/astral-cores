@@ -30,7 +30,7 @@ public final class PhoenixCoreLogic {
         Effects.applyEffect(
                 player,
                 MobEffects.FIRE_RESISTANCE,
-                25,
+                40,
                 1
         );
 
@@ -39,7 +39,7 @@ public final class PhoenixCoreLogic {
             Effects.applyEffect(
                     player,
                     MobEffects.REGENERATION,
-                    25,
+                    200,
                     1
             );
         }
