@@ -85,7 +85,7 @@ public final class LeviathanCoreLogic {
             Effects.applyEffect(
                     player,
                     MobEffects.REGENERATION,
-                    20,
+                    200,
                     1,
                     false,
                     false,
