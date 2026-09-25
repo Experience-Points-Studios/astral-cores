@@ -1,5 +1,6 @@
 package de.ep.astralcores;
 
+import de.ep.astralcores.core.cores.logic.IllusionCoreLogic;
 import de.ep.astralcores.core.respawn.CoreRespawnManager;
 import de.ep.astralcores.manager.CoreCooldownManager;
 import de.ep.astralcores.manager.CoreTickManager;
@@ -44,6 +45,8 @@ public class MainLoop {
             PlayerData data = AstralCores.PLAYER_DATA.get(player);
             // Applies the cores tick function
             CoreTickManager.tick(player, data);
+
+            IllusionCoreLogic.tick();
         }
     }
 

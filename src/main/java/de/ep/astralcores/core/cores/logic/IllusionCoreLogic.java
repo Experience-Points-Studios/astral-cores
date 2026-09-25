@@ -15,7 +15,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -84,9 +83,9 @@ public final class IllusionCoreLogic {
                     return true;
                 }
 
-                // Five seconds elapsed -> remove mannequin.
+                // 30 seconds elapsed -> remove mannequin.
                 if (data.timer().tick()) {
-                    mannequin.discard();
+                   mannequin.discard();
                     return true;
                 }
 
