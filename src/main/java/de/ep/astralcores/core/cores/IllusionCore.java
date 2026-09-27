@@ -76,4 +76,9 @@ public class IllusionCore extends Core {
     public void onPlayerDisconnect(ServerPlayer player) {
         IllusionCoreLogic.onPlayerDisconnect(player);
     }
+
+    @Override
+    public void tick(ServerPlayer player) {
+        IllusionCoreLogic.tick();
+    }
 }
