@@ -34,6 +34,7 @@ public class Config {
 
     public static class AeroCore {
         public int active_cooldown = 30;
+        public float max_shockwave_damage = 12.0F;
     }
 
     public static class BerserkerCore {

@@ -1,6 +1,7 @@
 package de.ep.astralcores.core.cores.logic;
 
 import de.ep.astralcores.AstralCores;
+import de.ep.astralcores.config.ConfigManager;
 import de.ep.astralcores.core.CoreType;
 import de.ep.astralcores.core.data.CoreActivationResult;
 import de.ep.astralcores.playerdata.PlayerData;
@@ -62,7 +63,7 @@ public class AeroCoreLogic {
 
             // Maximum shockwave damage is 12 damage.
             float shockwaveDamage =
-                    Math.min(rawDamage, 12.0F);
+                    Math.min(rawDamage, ConfigManager.get().cores.aero_core.max_shockwave_damage);
 
             double maxRadius = 3.5;
 
